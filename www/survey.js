@@ -1381,6 +1381,7 @@ function check_user() {
 		
 		//alert(apipath_base_photo_dm);
 		$("#loginButton").hide();
+		$("#doctorButton").hide();
 		$("#wait_image_login").show();
 		$("#error_logintext").val(apipath_base_photo_dm);
 		$.ajax(apipath_base_photo_dm,{
@@ -1411,6 +1412,7 @@ function check_user() {
 						if(base_url=='' || photo_url==''){	
 							$("#wait_image_login").hide();
 							$("#loginButton").show();
+							$("#doctorButton").show();
 							$("#error_login").html('Base URL not available');	
 						}
 						else{
@@ -2081,6 +2083,7 @@ localStorage.report_button=' <input type="submit" id="loginButton" onClick="s_or
 													
 													$("#wait_image_login").hide();
 													$("#loginButton").show();
+													$("#doctorButton").show();
 													if (localStorage.user_type=='sup'){
 													 checkRequest()
 													}
@@ -11341,6 +11344,7 @@ function page_opItemPage(){
 function doctor_sync(){
 	$("#wait_image_login").show();
 	$("#doctorButton").hide();
+	$("#loginButton").hide();
 	//alert (localStorage.base_url+'doctor_sync?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode)							
 $.ajax(localStorage.base_url+'doctor_sync?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode,{
 								// cid:localStorage.cid,rep_id:localStorage.user_id,rep_pass:localStorage.user_pass,synccode:localStorage.synccode,
@@ -11351,6 +11355,7 @@ $.ajax(localStorage.base_url+'doctor_sync?cid='+localStorage.cid+'&rep_id='+loca
 									$("#error_login").html(resultArray[1]);
 									$("#wait_image_login").hide();
 									$("#doctorButton").show();
+									$("#loginButton").show();
 											
 								},
 							success:function(data, status,xhr){				
@@ -11360,25 +11365,29 @@ $.ajax(localStorage.base_url+'doctor_sync?cid='+localStorage.cid+'&rep_id='+loca
 									$("#error_login").html('Network timeout. Please ensure you have active internet connection.');
 									$("#wait_image_login").hide();
 									$("#doctorButton").show();
+									$("#loginButton").show();
 								}
 								else{
 									   var resultArray = data.split('<SYNCDATA>');	
 									   
 										if (resultArray[0]=='FAILED'){						
 											$("#wait_image_login").hide();
-											$("#doctorButton").show();								
+											$("#doctorButton").show();		
+											$("#loginButton").show();						
 											$("#error_login").html(resultArray[1]);
 										}else if (resultArray[0]=='SUCCESS'){
 											
 											$("#error_login").html("Doctor Synced Successfully");
 											$("#wait_image_login").hide();
-											$("#doctorButton").show();									
+											$("#doctorButton").show();		
+											$("#loginButton").show();							
 											localStorage.market_doctorVisit=resultArray[1];
 
 										}else{						
 											$("#error_login").html('Authentication error. Please register and sync to retry.');
 											$("#wait_image_login").hide();
 											$("#doctorButton").show();
+											$("#loginButton").show();
 											}
 								}
 }
