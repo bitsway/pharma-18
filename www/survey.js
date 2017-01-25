@@ -2990,12 +2990,25 @@ function repCancelReqSubmit(){
 		
 		
 	}
+	
+	comboValue= $("#othersAll").val();
+	if (comboValue!=''){
+		
+		if (submitStr==''){
+			submitStr=comboValue+'<fd>'+comboValue
+		}
+		else{
+			submitStr=submitStr+'<rd>'+comboValue+'<fd>'+comboValue
+		}
+		
+	}
+	
 	submitStr=schDate+'<date>'+submitStr
 	//checkLeave = $("#amndleav").prop("checked");
 	//checkOthers = $("#amndOthers").prop("checked");
 
 
-	//alert (localStorage.base_url+'tourCReq_doc?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&submitStr='+encodeURI(submitStr))
+	alert (localStorage.base_url+'tourCReq_doc?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&submitStr='+encodeURI(submitStr))
 	
 
 	$.ajax(localStorage.base_url+'tourCReq_doc?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&submitStr='+encodeURI(submitStr),{
@@ -5194,25 +5207,40 @@ $("#err_marketTour").html('');
 
 
 		var marketList=(localStorage.marketTourStr).split('<rd>')
-		
-		for (var m=0; m < marketList.length; m++){
-			var dateGet=''
-			var marketId=marketList[m].split('<fd>')[0]
-			var marketName=marketList[m].split('<fd>')[1]
-			var checkId=i+'n'+m+"_"+marketId
-			check = $("#"+checkId).prop("checked");
-			if(check) {
-				dateGet=$("#"+i+"_date").val();
-				if (submitStr==''){
-					submitStr=dateGet+'<fd>'+marketId+'<fd>'+marketName
+		var comboValue=''
+		comboValue= $("#othersAll"+i).val();
+		//alert (comboValue)
+			for (var m=0; m < marketList.length; m++){
+				var dateGet=''
+				
+				var marketId=marketList[m].split('<fd>')[0]
+				var marketName=marketList[m].split('<fd>')[1]
+				var checkId=i+'n'+m+"_"+marketId
+				check = $("#"+checkId).prop("checked");
+				
+					if(check) {
+						dateGet=$("#"+i+"_date").val();
+						if (submitStr==''){
+							submitStr=dateGet+'<fd>'+marketId+'<fd>'+marketName
+						}
+						else{
+							submitStr=submitStr+'<rd>'+dateGet+'<fd>'+marketId+'<fd>'+marketName
+						}
+					} 
+				
+				
+			}
+			if (comboValue!=''){
+					//dateGet=$("#"+i+"_date").val();
+						if (submitStr==''){
+							submitStr=dateGet+'<fd>'+comboValue+'<fd>'+comboValue
+						}
+						else{
+							submitStr=submitStr+'<rd>'+dateGet+'<fd>'+comboValue+'<fd>'+comboValue
+						}
+					
 				}
-				else{
-					submitStr=submitStr+'<rd>'+dateGet+'<fd>'+marketId+'<fd>'+marketName
-				}
-			} 
 			
-			
-		}
 	}
 	var errFlag=0
 	if (submitStr==''){
@@ -5223,7 +5251,7 @@ $("#err_marketTour").html('');
 		
 		
 	if (errFlag==0){
-		//alert (localStorage.base_url+'tourDocEntry?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&submitStr='+encodeURI(submitStr));		
+		alert (localStorage.base_url+'tourDocEntry?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&submitStr='+encodeURI(submitStr));		
 				
 			   $.ajax(localStorage.base_url+'tourDocEntry?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&submitStr='+encodeURI(submitStr),{
 		
