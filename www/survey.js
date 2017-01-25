@@ -751,7 +751,7 @@ function getLocationInfo() { //location
 	
 	$("#wait_image_visit_submit_doc").hide()
 	$("#visit_submit_doc").show();
-	$("#visit_location_doc").hide();
+	//$("#visit_location_doc").hide();
 	$("#checkLocation_doc").html('');
 	
 	
@@ -794,8 +794,8 @@ function onSuccess(position) {
 	$("#checkLocation_doc").html('Location Confirmed'); 
 
 	$("#wait_image_visit_submit_doc").hide();
-	$("#visit_submit_doc").show();
-	$("#visit_location_doc").hide();
+	//$("#visit_submit_doc").show();
+	//$("#visit_location_doc").hide();
 	localStorage.location_error=''
 	codeLatLng(position.coords.latitude, position.coords.longitude)
 	
@@ -853,8 +853,8 @@ function getLocationInfo_ready() { //location
 	
 	
 	$("#wait_image_visit_submit_doc").hide()
-	$("#visit_submit_doc").show();
-	$("#visit_location_doc").hide();
+	//$("#visit_submit_doc").show();
+	//$("#visit_location_doc").hide();
 	
 	$("#checkLocation_doc").html('');
 	
@@ -893,8 +893,8 @@ function onSuccess_ready(position) {
 	$("#checkLocation_doc").html('Location Confirmed'); 
 
 	$("#wait_image_visit_submit_doc").hide();
-	$("#visit_submit_doc").show();
-	$("#visit_location_doc").hide();
+	//$("#visit_submit_doc").show();
+	//$("#visit_location_doc").hide();
 	//alert (position.coords.longitude)
 	geocoder = new google.maps.Geocoder();
 	codeLatLng(position.coords.latitude, position.coords.longitude)
@@ -923,8 +923,8 @@ function onError_ready(error) {
 	
     $("#checkLocation_doc").html('');
 	$("#wait_image_visit_submit_doc").hide();
-	$("#visit_submit_doc").show();
-	$("#visit_location_doc").hide();
+	//$("#visit_submit_doc").show();
+	//$("#visit_location_doc").hide();
 }
 
 
@@ -1364,6 +1364,7 @@ function check_user() {
 		localStorage.docMarketComb=''
 		localStorage.prProdID_Str=''
 		localStorage.opProdID_Str=''
+		localStorage.market_doctorVisit=''
 		
 		localStorage.picFlag=0;
 		//-----
@@ -2187,6 +2188,7 @@ function doctor_visit_plan() {
 	localStorage.doctor_plan_flag=1;
 	localStorage.tourFlag=0
 	localStorage.saved_data_submit=0;
+	localStorage.doctor_pr=0;
 	localStorage.visit_page="NO";
 	//addMarketList();
 	if (localStorage.doctor_flag==1 && localStorage.cTeam==1) {addMarketListCteam();}else{addMarketListDoctor();}
@@ -3272,7 +3274,7 @@ function tourCheckFirst(){
 					
 					//alert (checkId)
 					}
-					var selectCombo='</br><select id="othersAll" style=" width:100px" data-native-menu="false"  >'
+					var selectCombo='</br><select id="othersAll'+i+'" style=" width:100px" data-native-menu="false"  >'
 						selectCombo=selectCombo+'<option value="" >Select</option>'
                         selectCombo=selectCombo+'<option value="HOLIDAY" >HOLIDAY</option>'
 						selectCombo=selectCombo+'<option value="MEETING" >MEETING</option>'
@@ -3285,7 +3287,7 @@ function tourCheckFirst(){
 				
 			nextMonthTable=nextMonthTable+selectCombo+'</br></td></tr>'
 			}
-			nextMonthTable=nextMonthTable+'</table><input type="submit" id="nextMonthSubmitButton"  onClick="tourSubmit_doc();"   style="width:100%; height:50px; background-color:#09C; color:#FFF; font-size:20px" value="     Submit      "   />'
+			nextMonthTable=nextMonthTable+'</br></table><input type="submit" id="nextMonthSubmitButton"  onClick="tourSubmit_doc();"   style="width:100%; height:50px; background-color:#09C; color:#FFF; font-size:20px" value="     Submit      "   /></br></br>'
 			
 	}
 	else{
@@ -3372,7 +3374,9 @@ function marketNextLV(lvalue) {
 	
 	//getLocationInfo();
 	getLocationInfo_ready()
+
 	if (localStorage.doctor_flag==1){
+		
 		marketNext_doc();
 	}
 	else{
@@ -4573,8 +4577,13 @@ function marketNext_doc() {
 			
 			var visit_type="Unscheduled";
 			var scheduled_date="";
-			
-			result=localStorage.market_doctor
+			//alert (localStorage.doctor_pr)
+			if (localStorage.doctor_pr==1){
+				result=localStorage.market_doctor
+				}
+			else{
+				result=localStorage.market_doctorVisit
+			}
 			
 			var resultArray = result.split('</'+market_Id+'>');
 			var doc_result_list=resultArray[0].split('<'+market_Id+'>')
@@ -11336,7 +11345,7 @@ $.ajax(localStorage.base_url+'doctor_sync?cid='+localStorage.cid+'&rep_id='+loca
 											$("#error_login").html("Doctor Synced Successfully");
 											$("#wait_image_login").hide();
 											$("#doctorButton").show();									
-											localStorage.market_doctor=resultArray[1];
+											localStorage.market_doctorVisit=resultArray[1];
 
 										}else{						
 											$("#error_login").html('Authentication error. Please register and sync to retry.');
