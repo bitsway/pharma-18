@@ -3008,7 +3008,7 @@ function repCancelReqSubmit(){
 	//checkOthers = $("#amndOthers").prop("checked");
 
 
-	alert (localStorage.base_url+'tourCReq_doc?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&submitStr='+encodeURI(submitStr))
+	//alert (localStorage.base_url+'tourCReq_doc?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&submitStr='+encodeURI(submitStr))
 	
 
 	$.ajax(localStorage.base_url+'tourCReq_doc?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&submitStr='+encodeURI(submitStr),{
@@ -5231,7 +5231,7 @@ $("#err_marketTour").html('');
 				
 			}
 			if (comboValue!=''){
-					//dateGet=$("#"+i+"_date").val();
+					dateGet=$("#"+i+"_date").val();
 						if (submitStr==''){
 							submitStr=dateGet+'<fd>'+comboValue+'<fd>'+comboValue
 						}
@@ -5251,7 +5251,7 @@ $("#err_marketTour").html('');
 		
 		
 	if (errFlag==0){
-		alert (localStorage.base_url+'tourDocEntry?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&submitStr='+encodeURI(submitStr));		
+		//alert (localStorage.base_url+'tourDocEntry?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&submitStr='+encodeURI(submitStr));		
 				
 			   $.ajax(localStorage.base_url+'tourDocEntry?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&submitStr='+encodeURI(submitStr),{
 		
