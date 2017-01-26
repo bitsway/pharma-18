@@ -3398,7 +3398,7 @@ function marketNextLV(lvalue) {
 	
 	//getLocationInfo();
 	getLocationInfo_ready()
-	alert (localStorage.doctor_flag)
+	//alert (localStorage.doctor_flag)
 	if (localStorage.doctor_flag==1){
 		
 		marketNext_doc();
@@ -4587,7 +4587,7 @@ function marketNext_doc() {
 	
 	market_name=$("#unschedule_market_combo_id").val();
 	localStorage.visit_market_show=market_name
-	alert (localStorage.visit_market_show)
+	//alert (localStorage.visit_market_show)
 	if(market_name=='' || market_name==0){
 			$("#err_market_next").text("Market required");
 		}else{
@@ -4605,10 +4605,11 @@ function marketNext_doc() {
 //			unscheduled_m_client_combo_ob.empty()
 		
 			if (localStorage.doctor_plan_flag==1){
+				alert (1)
 				result=localStorage.market_doctorVisit
 				}
 			else{
-				
+				alert (2)
 				result=localStorage.market_doctor
 			}
 			
