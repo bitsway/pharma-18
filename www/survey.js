@@ -4600,8 +4600,8 @@ function marketNext_doc() {
 			
 			var visit_type="Unscheduled";
 			var scheduled_date="";
-			var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id_lv');
-			unscheduled_m_client_combo_ob.empty()
+			//var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id_lv');
+//			unscheduled_m_client_combo_ob.empty()
 			if (localStorage.doctor_plan_flag==1){
 				result=localStorage.market_doctorVisit
 				}
@@ -4629,10 +4629,10 @@ function marketNext_doc() {
 						$("#err_market_next").text("Doctor not available");	
 						$("#wait_image_unschedule_market").hide();		
 						$("#btn_unschedule_market").show();
-						//var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id');
-						//var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id_lv');
-//						
-//						unscheduled_m_client_combo_ob.empty()
+						var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id');
+						var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id_lv');
+						
+						unscheduled_m_client_combo_ob.empty()
 						$.afui.loadContent("#page_market_ret",true,true,'right');
 						unscheduled_m_client_combo_ob.listview("refresh");
 						
@@ -4658,10 +4658,10 @@ function marketNext_doc() {
 						}
 									
 									
-						//var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id');
-						//var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id_lv');
-//						
-//						unscheduled_m_client_combo_ob.empty()
+						var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id');
+						var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id_lv');
+						
+						unscheduled_m_client_combo_ob.empty()
 						unscheduled_m_client_combo_ob.append(unscheduled_m_client_list);
 									
 						$(".market").html(market_name);								
