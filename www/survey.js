@@ -2915,7 +2915,7 @@ function repCancelReqShow(i){
 	//amndLeave=amndLeave+'<table width="100%" border="0"  cellpadding="0" cellspacing="0" style="border-radius:5px;"><tr style="border-bottom:1px solid #D2EEE9;"><td width="60px" style="text-align:center; padding-left:5px;"><input class="docCampaign" type="checkbox"  name="amndleav" value="checkbox" id="amndleav" ><label for="amndleav"></br></label></td><td  style="text-align:left;"></br>Leave</br></br></td></tr></table>'
 	amndTable=amndTable+selectCombo
 	$("#amndReq").html(amndTable)
-	//$("#amndLeave").html(amndLeave)
+	$('#tourCancelShow').html('');
 	$.afui.loadContent("#page_tour_cancel",true,true,'right');
 
 }
@@ -3130,6 +3130,8 @@ function tourCReq_doc(i){
 function tourCheckFirst(){
 	$("#wait_image_retTour").hide();	
 	$("#err_marketTour").html('');
+	//$("#wait_image_refresh").show();
+	
 	//showSubmitDocShow()
 //===================================================================
 	//alert (localStorage.base_url+'check_this_n_next_month?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode)
@@ -3182,7 +3184,7 @@ function tourCheckFirst(){
 	var month = d.getMonth()+1;
 	var day = d.getDate();
 	var year =d.getFullYear();
-	
+
 	var monthThis=''
 	
 	if (month==1){monthThisShow='January'+'  '+year;}
@@ -3235,7 +3237,16 @@ function tourCheckFirst(){
 			thisMonthTable=thisMonthTable+'<font id="'+i+'editinfo">'+dayRoute+'</font>'
 
 		}
-		thisMonthTable=thisMonthTable+'<div align="right"><img  style="width:30px; height:30px" onClick="repCancelReqShow('+i+');"  src="editProfile.png" alt=""></div></td></tr>'	
+		//alert (parseInt(day))
+		if (parseInt(dayShow) > parseInt(day)){
+			
+		thisMonthTable=thisMonthTable+'<div align="right"><img  style="width:30px; height:30px" onClick="repCancelReqShow('+i+');"  src="editProfile.png" alt=""></div></td></tr>'
+		//alert (thisMonthTable)
+		}
+		else{
+			//alert ('2')
+			thisMonthTable=thisMonthTable+' </td></tr>'
+		}
 		//thisMonthTable=thisMonthTable+'</td></tr><tr><td style="border-style:hidden" width="8%" align="right"><img  style="width:30px; height:30px" onClick="repCancelReqShow('+i+');"  src="editProfile.png" alt=""></td> </tr>'
 		thisMonthTable=thisMonthTable+'</table>'
 	}
@@ -3365,7 +3376,7 @@ function tourCheckFirst(){
 	$('#nextMonth').html(nextMonthTable)
 	}
 function addMarketListTour() {
-	
+	$("#wait_image_refresh").hide();
 	tourCheckFirst()
 	//-----------------------------------------------------------
 	nextMShow()
@@ -3373,9 +3384,16 @@ function addMarketListTour() {
 }
 function addMarketListTourRefresh() {
 	
+	$("#wait_image_refresh").show();
+	
+	$("#refresh_white").hide()
+	//alert ('1')
 	tourCheckFirst()
 	//-----------------------------------------------------------
 	nextMShow()
+	
+	$("#wait_image_refresh").hide()
+	$("#refresh_white").show()
 	//$.afui.loadContent("#page_tour_market",true,true,'right');
 }
 

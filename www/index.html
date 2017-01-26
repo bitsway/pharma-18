@@ -2936,7 +2936,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           <tr>
             <td width="10%" align="left" onClick="homePage()"><img src="icon-arrow-bak.png" width="30" height="30" alt="Back" >	</td>
             <td align="center" style="font-size:18px; font-weight:normal; color:#F8F8F8">Tour Plan</td>
-            <td width="10%" onClick="addMarketListTourRefresh()" ><img style="width:30px; height:30px" src="refresh_white.png" alt=""></td> 
+            <td width="10%" onClick="addMarketListTourRefresh()" >
+            
+            <img id="wait_image_refresh" style="width:30px; height:30px" src="loading.gif" alt="" >	
+            <img id="refresh_white" style="width:30px; height:30px" src="refresh_white.png" alt=""></td> 
           </tr>
         </table>
 </header> 
