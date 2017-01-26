@@ -9941,10 +9941,15 @@ function page_Competitorsactivity() {
 }
 
 function page_PrescriptionCapture() {	
-	localStorage.doctor_pr=1;
-	localStorage.doctor_plan_flag=0
-	localStorage.doctor_flag=1
+	//localStorage.doctor_pr=1;
+//	localStorage.doctor_plan_flag=0
+//	localStorage.doctor_flag=1
 	//alert (localStorage.doctor_pr)
+	localStorage.doctor_flag=1;
+	localStorage.doctor_plan_flag=0;
+	localStorage.doctor_pr=1;
+	localStorage.tourFlag=0
+	localStorage.saved_data_submit=0;
 	$.afui.loadContent("#page_PrescriptionCapture",true,true,'right');
 }
 
