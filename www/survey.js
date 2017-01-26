@@ -1214,8 +1214,8 @@ function check_user() {
 	//Main
 
 	
-	//var  apipath_base_photo_dm='http://127.0.0.1:8000/demo/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
-	var  apipath_base_photo_dm='http://c003.cloudapp.net/demo/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+	var  apipath_base_photo_dm='http://127.0.0.1:8000/demo/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+	//var  apipath_base_photo_dm='http://c003.cloudapp.net/demo/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	//var  apipath_base_photo_dm='http://a006.yeapps.com/gpl/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	
 	
@@ -2226,11 +2226,16 @@ function doctor_visitPr() {
 	$("#ret_cat").hide();
 	$("#d_visit").html("Doctors");
 	//$("#doc_start").html('Visit > Market > Doctor');
+	//localStorage.doctor_flag=1;
+//	localStorage.doctor_plan_flag=0;
+//	
+//	localStorage.saved_data_submit=0;
+//	localStorage.doctor_pr=1;
 	localStorage.doctor_flag=1;
 	localStorage.doctor_plan_flag=0;
-	
-	localStorage.saved_data_submit=0;
 	localStorage.doctor_pr=1;
+	localStorage.tourFlag=0
+	localStorage.saved_data_submit=0;
 	//alert (localStorage.doctor_pr)
 	localStorage.visit_page="NO";
 	//addMarketList();
@@ -4593,7 +4598,8 @@ function marketNext_doc() {
 			
 			var visit_type="Unscheduled";
 			var scheduled_date="";
-			//alert (localStorage.doctor_pr)
+			var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id_lv');
+			unscheduled_m_client_combo_ob.empty()
 			if (localStorage.doctor_plan_flag==1){
 				result=localStorage.market_doctorVisit
 				}
@@ -4621,10 +4627,10 @@ function marketNext_doc() {
 						$("#err_market_next").text("Doctor not available");	
 						$("#wait_image_unschedule_market").hide();		
 						$("#btn_unschedule_market").show();
-						var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id');
-						var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id_lv');
-						
-						unscheduled_m_client_combo_ob.empty()
+						//var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id');
+						//var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id_lv');
+//						
+//						unscheduled_m_client_combo_ob.empty()
 						$.afui.loadContent("#page_market_ret",true,true,'right');
 						unscheduled_m_client_combo_ob.listview("refresh");
 						
@@ -4650,10 +4656,10 @@ function marketNext_doc() {
 						}
 									
 									
-						var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id');
-						var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id_lv');
-						
-						unscheduled_m_client_combo_ob.empty()
+						//var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id');
+						//var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id_lv');
+//						
+//						unscheduled_m_client_combo_ob.empty()
 						unscheduled_m_client_combo_ob.append(unscheduled_m_client_list);
 									
 						$(".market").html(market_name);								
