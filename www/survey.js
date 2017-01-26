@@ -3380,7 +3380,9 @@ function addMarketListTourRefresh() {
 
 function addMarketListCteam() {
 	$("#market_combo_id_lv").val('');
-	var unschedule_market_combo_listCteam=localStorage.visit_plan_marketlist_comboCteam;
+	//var unschedule_market_combo_listCteam=localStorage.visit_plan_marketlist_comboCteam;
+	
+	var unschedule_market_combo_listCteam=localStorage.docMarketComb;
 	$('#market_combo_id_lv').empty();
 	//alert (unschedule_market_combo_listCteam)
 	$('#market_combo_id_lv').append(unschedule_market_combo_listCteam);
