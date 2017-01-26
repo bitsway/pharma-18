@@ -421,7 +421,7 @@ function page_market() {
 }
 function page_market_ret() {
 	
-	if (localStorage.doctor_flag==1) {addMarketListCteam();}else{addMarketList();}
+	if (localStorage.doctor_flag==1) {addMarketList();}else{addMarketList();}
 	if (localStorage.doctor_flag==1){
 		$("#addDocanc").show();
 		$("#blankAnc").hide();
@@ -433,7 +433,7 @@ function page_market_ret() {
 	$.afui.loadContent("#page_market_ret",true,true,'right');
 }
 function page_market_ret_doc() {
-	if (localStorage.doctor_flag==1 && localStorage.cTeam==1) {addMarketListCteam();}else{addMarketList();}
+	if (localStorage.doctor_flag==1 && localStorage.cTeam==1) {addMarketList();}else{addMarketList();}
 	$("#addDocanc").show();
 	$("#blankAnc").hide();
 	$.afui.loadContent("#page_market_ret",true,true,'right');
@@ -445,7 +445,7 @@ function page_visit() {
 }
 function page_visit_doc() {
 	
-	if (localStorage.doctor_flag==1 && localStorage.cTeam==1) {addMarketListCteam();}else{addMarketList();}
+	if (localStorage.doctor_flag==1 && localStorage.cTeam==1) {addMarketList();}else{addMarketList();}
 	
 	$("#addDocanc").show();
 	$("#blankAnc").hide();
@@ -2194,7 +2194,7 @@ function doctor_visit_plan() {
 	localStorage.doctor_pr=0;
 	localStorage.visit_page="NO";
 	//addMarketList();
-	if (localStorage.doctor_flag==1 && localStorage.cTeam==1) {addMarketListCteam();}else{addMarketListDoctor();}
+	if (localStorage.doctor_flag==1 && localStorage.cTeam==1) {addMarketList();}else{addMarketListDoctor();}
 	$("#addDocanc").show();
 	$("#blankAnc").hide();
 	$("#dPending").show();
@@ -2213,7 +2213,7 @@ function doctor_visit() {
 	localStorage.saved_data_submit=0;
 	localStorage.visit_page="NO";
 	//addMarketList();
-	if (localStorage.doctor_flag==1 && localStorage.cTeam==1) {addMarketListCteam();}else{addMarketList();}
+	if (localStorage.doctor_flag==1 && localStorage.cTeam==1) {addMarketList();}else{addMarketList();}
 	$("#addDocanc").show();
 	$("#blankAnc").hide();
 	$("#dPending").show();
@@ -2239,7 +2239,7 @@ function doctor_visitPr() {
 	//alert (localStorage.doctor_pr)
 	localStorage.visit_page="NO";
 	//addMarketList();
-	if (localStorage.doctor_flag==1 && localStorage.cTeam==1) {addMarketListCteam();}else{addMarketList();}
+	if (localStorage.doctor_flag==1 && localStorage.cTeam==1) {addMarketList();}else{addMarketList();}
 	$("#addDocanc").show();
 	$("#blankAnc").hide();
 	$("#dPending").show();
@@ -2247,7 +2247,7 @@ function doctor_visitPr() {
 	
 }
 function doctor_profile() {
-	if (localStorage.doctor_flag==1 && localStorage.cTeam==1) {addMarketListCteam();}else{addMarketList();}
+	if (localStorage.doctor_flag==1 && localStorage.cTeam==1) {addMarketList();}else{addMarketList();}
 	$("#ret_cat").hide();
 	$("#d_visit").html("Doctors");
 	//$("#v_path").html('<font style="font-weight:bold; font-size:13px; color:#666">Visit > Market > Doctor</font>');
@@ -3382,7 +3382,7 @@ function addMarketListCteam() {
 	$("#market_combo_id_lv").val('');
 	//var unschedule_market_combo_listCteam=localStorage.visit_plan_marketlist_comboCteam;
 	
-	var unschedule_market_combo_listCteam=localStorage.docMarketComb;
+	//var unschedule_market_combo_listCteam=localStorage.docMarketComb;
 	$('#market_combo_id_lv').empty();
 	//alert (unschedule_market_combo_listCteam)
 	$('#market_combo_id_lv').append(unschedule_market_combo_listCteam);
