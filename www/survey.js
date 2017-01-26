@@ -4594,11 +4594,12 @@ function marketNext_doc() {
 			var visit_type="Unscheduled";
 			var scheduled_date="";
 			//alert (localStorage.doctor_pr)
-			if (localStorage.doctor_pr==1){
-				result=localStorage.market_doctor
+			if (localStorage.doctor_plan_flag==1){
+				result=localStorage.market_doctorVisit
 				}
 			else{
-				result=localStorage.market_doctorVisit
+				
+				result=localStorage.market_doctor
 			}
 			
 			var resultArray = result.split('</'+market_Id+'>');
@@ -9941,6 +9942,8 @@ function page_Competitorsactivity() {
 
 function page_PrescriptionCapture() {	
 	localStorage.doctor_pr=1;
+	localStorage.doctor_plan_flag=0
+	localStorage.doctor_flag=1
 	//alert (localStorage.doctor_pr)
 	$.afui.loadContent("#page_PrescriptionCapture",true,true,'right');
 }

@@ -426,7 +426,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                 <td>
                 <table width="100%" border="0" style="font-size:16px; color:#FFF">
  <tr>
-    <td align="center" onClick="page_outstanding()"><br>Out Standing<br><br></td>
+    <td align="center" onClick="page_outstanding()"><br>OutStanding<br><br></td>
   </tr>
   <tr style="background-color:#3892F3" >
     <td align="center" onClick="page_invoice()" ><br>Last Invoice<br><br></td>
@@ -590,12 +590,12 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                 <br>
                  
 
-          	 <div onClick="page_outstanding()" align="center"> <img style="height:80px; width:150px" src="outstanding.png"> </div>
+          	 <!--<div onClick="page_outstanding()" align="center"> <img style="height:80px; width:150px" src="outstanding.png"> </div>
              <br>
              <div onClick="page_invoice()" align="center"> <img style="height:80px; width:150px" src="invoice.png"></div>
              <br>
              <div onClick="page_clientOrder()" align="center"> <img style="height:80px; width:100px" src="orderC.png"></div>
-             <br>
+             <br>-->
              <div onClick="page_clientApproved()" align="center"> <img style="height:80px; width:120px" src="approved.png"></div>
                         
              <div onClick="page_businessVolume()" align="center"> <img style="height:80px; width:150px" src="BusinessVolume.png"></div>
@@ -1049,10 +1049,12 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                          </td>-->
                          <td ><input type="checkbox" name="v_with_AM" value='AM' id="v_with_AM" >  <label for="v_with_AM"><font style=" font-size:10px">AM</font></label>
                          </td>
-						<td > <input type="checkbox" name="v_with_MPO" value='MPO' id="v_with_MPO" >  <label for="v_with_MPO"><font style=" font-size:10px">MPO</font></label>
+                          <td ><input type="checkbox" name="v_with_RSM" value='RSM' id="v_with_RSM" >  <label for="v_with_RSM"><font style=" font-size:10px">RSM</font></label>
+                         </td>
+						<td > <input type="checkbox" name="v_with_MPO" value='ASM' id="v_with_MPO" >  <label for="v_with_MPO"><font style=" font-size:10px">ASM</font></label>
                         </td>
                         
-                         <td ><input type="checkbox" name="v_with_RSM" value='RSM' id="v_with_RSM" >  <label for="v_with_RSM"><font style=" font-size:10px">RSM</font></label>
+                        
                         
 					  </tr>
 			  </table>
