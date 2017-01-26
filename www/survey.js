@@ -4604,14 +4604,13 @@ function marketNext_doc() {
 			//var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id_lv');
 //			unscheduled_m_client_combo_ob.empty()
 		
-			//if (localStorage.doctor_plan_flag==1){
-				//alert (2)
+			if (localStorage.doctor_plan_flag==1){
 				result=localStorage.market_doctorVisit
-			//	}
-			//else{
-			//	alert (2)
+				}
+			else{
+				//alert (localStorage.market_doctor)
 				result=localStorage.market_doctor
-			//}
+			}
 			
 			var resultArray = result.split('</'+market_Id+'>');
 			var doc_result_list=resultArray[0].split('<'+market_Id+'>')
