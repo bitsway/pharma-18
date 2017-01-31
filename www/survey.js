@@ -243,7 +243,8 @@ $.afui.useOSThemes=false;
 			//$.afui.loadContent("#pageHome",true,true,'right');
 			
 		}
-		if ((localStorage.synced=='YES') & (localStorage.sync_date==today)){
+		//if ((localStorage.synced=='YES') & (localStorage.sync_date==today)){
+		if (localStorage.synced=='YES') {
 			$.afui.loadContent("#pageHome",true,true,'right');
 		}
 		
@@ -393,7 +394,8 @@ function homePage() {
 	var today=  year + "-" + month + "-" + day
 							
 
-	if ((localStorage.synced=='YES') & (localStorage.sync_date==today)){
+	//if ((localStorage.synced=='YES') & (localStorage.sync_date==today)){
+	if (localStorage.synced=='YES'){
 		$.afui.loadContent("#pageHome",true,true,'right');
 	}
 	
@@ -1204,40 +1206,7 @@ function get_login() {
 	$.afui.loadContent("#login",true,true,'right');
 
 	}
-
-function check_user() {
-	
-	
-	var cid=$("#cid").val().toUpperCase();
-	cid=$.trim(cid);
-	
-	//Main
-
-	
-	//var  apipath_base_photo_dm='http://127.0.0.1:8000/demo/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
-	var  apipath_base_photo_dm='http://c003.cloudapp.net/demo/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
-	//var  apipath_base_photo_dm='http://a006.yeapps.com/gpl/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
-	
-	
-	//var  apipath_base_photo_dm='http://c003.cloudapp.net/demo/syncmobile_417/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
-	
-
-  // var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_20150502/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
- 
-	
-	var user_id=$("#user_id").val();
-	var user_pass=$("#user_pass").val();
-	
-	user_id=$.trim(user_id);
-	
-	var base_url='';
-	var photo_url='';
-	
-		localStorage.base_url='';
-		localStorage.photo_url='';
-		localStorage.photo_submit_url='';
-		
-
+function afterSync(){
 		localStorage.marketListStr='';
 		localStorage.productListStr='';
 		localStorage.product_tbl_cart='';
@@ -1367,6 +1336,31 @@ function check_user() {
 		localStorage.market_doctorVisit=''
 		
 		localStorage.picFlag=0;
+}
+function check_user() {	
+	var cid=$("#cid").val().toUpperCase();
+	cid=$.trim(cid);
+	
+	//Main
+
+	
+	//var  apipath_base_photo_dm='http://127.0.0.1:8000/demo/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+	//var  apipath_base_photo_dm='http://c003.cloudapp.net/demo/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+	//var  apipath_base_photo_dm='http://a006.yeapps.com/gpl/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+	
+	
+	var  apipath_base_photo_dm='http://c003.cloudapp.net/demo/syncmobile_417/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+	
+
+  // var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_20150502/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
+ 
+	
+	var user_id=$("#user_id").val();
+	var user_pass=$("#user_pass").val();
+	
+	user_id=$.trim(user_id);
+	
+	
 		//-----
 	
 	if (user_id=="" || user_id==undefined || user_pass=="" || user_pass==undefined){
@@ -1375,10 +1369,7 @@ function check_user() {
 		$("#error_login").html("Required User ID and Password");	
 	}else{
 		//-----------------
-		localStorage.base_url='';
-		localStorage.photo_url='';
-		localStorage.photo_submit_url='';
-		
+			
 		//alert(apipath_base_photo_dm);
 		$("#loginButton").hide();
 		$("#doctorButton").hide();
@@ -1402,10 +1393,10 @@ function check_user() {
 				var dtaStr=data.replace('<start>','').replace('<end>','')
 				var resultArray = dtaStr.split('<fd>');		
 					if(resultArray.length==4){
-						base_url=resultArray[0];
-						photo_url=resultArray[1];
-						photo_submit_url=resultArray[2];
-						report_url=resultArray[3];
+						var base_url=resultArray[0];
+						var photo_url=resultArray[1];
+						var photo_submit_url=resultArray[2];
+						var report_url=resultArray[3];
 						
 						
 						//-------------
@@ -1416,6 +1407,10 @@ function check_user() {
 							$("#error_login").html('Base URL not available');	
 						}
 						else{
+							localStorage.base_url='';
+							localStorage.photo_url='';
+							localStorage.photo_submit_url='';
+							
 //							--------------------------
 							
 							localStorage.base_url=base_url;
@@ -1464,7 +1459,7 @@ function check_user() {
 											$("#error_login").html(resultArray[1]);
 										}
 										else if (resultArray[0]=='SUCCESS'){
-													//alert (resultArray)
+													afterSync()
 													localStorage.synccode=resultArray[1];
 													localStorage.marketListStr=resultArray[2];
 													//alert (resultArray[2]);
@@ -3134,7 +3129,7 @@ function tourCheckFirst(){
 	
 	//showSubmitDocShow()
 //===================================================================
-	//alert (localStorage.base_url+'check_this_n_next_month?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode)
+	alert (localStorage.base_url+'check_this_n_next_month?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode)
 	
 	
 	$.ajax(localStorage.base_url+'check_this_n_next_month?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode,{
@@ -3143,7 +3138,7 @@ function tourCheckFirst(){
 			error: function(xhr) {
 			//alert ('Error: ' + xhr.status + ' ' + xhr.statusText);
 			$("#wait_image_retTour").hide();
-			$("#err_marketTour").html('Network Timeout. Please check your Internet connection..');
+			$("#err_marketTour").html('Network Timeout. Please check your Internet connection..1');
 								},
 			success:function(data, status,xhr){	
 				
@@ -3175,7 +3170,7 @@ function tourCheckFirst(){
 });//end ajax
 
 	
-	var NextStatus='Submitted'
+	var NextStatus='Draft'
 	if (localStorage.appFlag==1){NextStatus='Approved'}
 //	====================================================
 	//var weekday = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
@@ -3290,7 +3285,7 @@ function tourCheckFirst(){
 				var dateNextMonth = yearNext+'-'+monthNextGet+'-'+dayShow;
 				//alert (dateNextMonth)
 				
-				nextMonthTable=nextMonthTable+'<tr ><td width="50px" height="14px">'+'<font >'+dayShow+'</font>'+'&nbsp;&nbsp;'+'<font >'+dayNameNext+'</font>'+'<input type="hidden" id="'+i+'_date" value="'+dateNextMonth+'"  /></td>'
+				nextMonthTable=nextMonthTable+'<tr ><td onClick="toggleDivNext('+i+')" width="50px" height="14px"> '+'<font >'+dayShow+'</font>'+'&nbsp;&nbsp;'+'<font >'+dayNameNext+'</font>'+'<input type="hidden" id="'+i+'_date" value="'+dateNextMonth+'"  /></td>'
 				nextMonthTable=nextMonthTable+'<td>'
 		
 				var marketList=(localStorage.marketTourStr).split('<rd>')
@@ -3303,7 +3298,7 @@ function tourCheckFirst(){
 					var marketIdShow='['+marketId+']'
 					if (marketName==''){ marketIdShow=''+marketId}
 					if (marketId!=''){
-					nextMonthTable=nextMonthTable+'<table width="100%" border="0"  cellpadding="0" cellspacing="0" style="border-radius:5px;"><tr style="border-bottom:1px solid #D2EEE9;"><td width="60px" style="text-align:center; padding-left:5px;"><input class="docCampaign" type="checkbox"  name="'+checkId+'" value="checkbox" id="'+checkId+'"><label for="'+checkId+'"></br></label></td><td  style="text-align:left;"></br>'+marketName+'</br></td></tr></table>'
+					nextMonthTable=nextMonthTable+'<div id="next_'+i+'"><table width="100%" border="0"  cellpadding="0" cellspacing="0" style="border-radius:5px;"><tr style="border-bottom:1px solid #D2EEE9;"><td width="60px" style="text-align:center; padding-left:5px;"><input class="docCampaign" type="checkbox"  name="'+checkId+'" value="checkbox" id="'+checkId+'"><label for="'+checkId+'"></br></label></td><td  style="text-align:left;"></br>'+marketName+'</br></td></tr></table>'
 					
 					//alert (checkId)
 					}
@@ -3314,12 +3309,18 @@ function tourCheckFirst(){
 						selectCombo=selectCombo+'<option value="LEAVE" >LEAVE</option>'
 						selectCombo=selectCombo+'<option value="OTHERS" >OTHERS</option>'
                         selectCombo=selectCombo+'</select>'
-				}
+					
+						
+				}		 
 				
 				
 				
-			nextMonthTable=nextMonthTable+selectCombo+'</br></td></tr>'
+			nextMonthTable=nextMonthTable+selectCombo+'</br><input type="submit" style="width:30px;" value="OK" onClick="setDiv('+i+')" /></div><div id="nextShow'+i+'"></div></td></tr>'
+			
+			
+			
 			}
+			//alert (nextMonthTable)
 			nextMonthTable=nextMonthTable+'</br></table><input type="submit" id="nextMonthSubmitButton"  onClick="tourSubmit_doc();"   style="width:100%; height:50px; background-color:#09C; color:#FFF; font-size:20px" value="     Submit      "   /></br></br>'
 			
 	}
@@ -3374,7 +3375,47 @@ function tourCheckFirst(){
 	}
 	//alert (nextMonthTable)
 	$('#nextMonth').html(nextMonthTable)
+	if (localStorage.docNextMonthRow==''){
+		for (var i=0; i < daysNext; i++){
+			$("#next_"+i).hide();
+		}
+		
 	}
+	}
+function setDiv(i){
+	var marketList=(localStorage.marketTourStr).split('<rd>')
+	var comboValue=''
+	var submitStr=''
+	comboValue= $("#othersAll"+i).val();
+	
+	for (var m=0; m < marketList.length; m++){
+		var marketId=marketList[m].split('<fd>')[0]
+		var marketName=marketList[m].split('<fd>')[1]
+		var checkId=i+'n'+m+"_"+marketId
+		check = $("#"+checkId).prop("checked");
+		
+			if(check) {
+				if (submitStr==''){
+					submitStr=marketName
+				}
+				else{
+					submitStr=submitStr+','+marketName
+				}
+			}
+		
+		
+	}
+	if (comboValue!=''){
+		submitStr=comboValue	
+		uncheckAll("next_"+i)
+	}
+	$("#nextShow"+i).html(submitStr)
+	$("#next_"+i).hide();
+}
+	
+function toggleDivNext(i){
+	$("#next_"+i).toggle();
+}
 function addMarketListTour() {
 	$("#wait_image_refresh").hide();
 	tourCheckFirst()
@@ -5232,7 +5273,7 @@ $("#err_marketTour").html('');
 	var yearNext =d.getFullYear();
 	var daysNext = Math.round(((new Date(yearNext, monthNextGet))-(new Date(yearNext, monthNextGet-1)))/86400000);
 	var submitStr=''
-	
+	var errFlag=0
 	for (var i=0; i < daysNext; i++){
 		var dayShow=i+1
 		var dateNextMonth = yearNext+'-'+monthNextGet+'-'+dayShow;
@@ -5243,14 +5284,16 @@ $("#err_marketTour").html('');
 		comboValue= $("#othersAll"+i).val();
 		//alert (comboValue)
 			for (var m=0; m < marketList.length; m++){
+				var checkFlag=1
 				var dateGet=''
 				
 				var marketId=marketList[m].split('<fd>')[0]
 				var marketName=marketList[m].split('<fd>')[1]
 				var checkId=i+'n'+m+"_"+marketId
-				check = $("#"+checkId).prop("checked");
-				
+				var check = $("#"+checkId).prop("checked");
+				//alert (check)
 					if(check) {
+						checkFlag=0
 						dateGet=$("#"+i+"_date").val();
 						if (submitStr==''){
 							submitStr=dateGet+'<fd>'+marketId+'<fd>'+marketName
@@ -5258,7 +5301,8 @@ $("#err_marketTour").html('');
 						else{
 							submitStr=submitStr+'<rd>'+dateGet+'<fd>'+marketId+'<fd>'+marketName
 						}
-					} 
+					}
+					 
 				
 				
 			}
@@ -5272,14 +5316,20 @@ $("#err_marketTour").html('');
 						}
 					
 				}
+		if ((comboValue=='') && (checkFlag==1)){errFlag=1}
 			
 	}
-	var errFlag=0
+	
 	if (submitStr==''){
-		$("#err_marketTour").html('Select Market');
+		//$("#err_marketTour").html('Select Market');
 		errFlag=1
 	}
+	
+	if (errFlag==1){
+		$("#err_marketTour").html('Day Plan missing');
+		$("#wait_image_retTour").hide();	
 
+	}
 		
 		
 	if (errFlag==0){
@@ -10635,7 +10685,7 @@ function prescription_submit(){
 			//alert (imageName);
 				
 				
-				$("#error_prescription_submittxt").val(localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&campaign_doc_str='+localStorage.prProdID_Str+'&opProdID_Str='+localStorage.opProdID_Str+'&medicine_1='+medicine_1+'&medicine_2='+medicine_2+'&medicine_3='+medicine_3+'&medicine_4='+medicine_4+'&medicine_5='+medicine_5+'&checkOther='+checkOther)							
+				alert (localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&campaign_doc_str='+localStorage.prProdID_Str+'&opProdID_Str='+localStorage.opProdID_Str+'&medicine_1='+medicine_1+'&medicine_2='+medicine_2+'&medicine_3='+medicine_3+'&medicine_4='+medicine_4+'&medicine_5='+medicine_5+'&checkOther='+checkOther)							
 
 				 $.ajax(localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&campaign_doc_str='+localStorage.prProdID_Str+'&opProdID_Str='+localStorage.opProdID_Str+'&medicine_1='+medicine_1+'&medicine_2='+medicine_2+'&medicine_3='+medicine_3+'&medicine_4='+medicine_4+'&medicine_5='+medicine_5+'&checkOther='+checkOther,{
 								// cid:localStorage.cid,rep_id:localStorage.user_id,rep_pass:localStorage.user_pass,synccode:localStorage.synccode,
