@@ -1347,6 +1347,7 @@ function check_user() {
 	//var  apipath_base_photo_dm='http://127.0.0.1:8000/demo/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	var  apipath_base_photo_dm='http://c003.cloudapp.net/demo/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	
+	
 	//var  apipath_base_photo_dm='http://a007.yeapps.com/acme/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	
 	
@@ -3288,7 +3289,7 @@ function tourCheckFirst(){
 				nextMonthTable=nextMonthTable+'<td>'
 		
 				var marketList=(localStorage.marketTourStr).split('<rd>')
-				
+				nextMonthTable=nextMonthTable+'<div id="nextShow'+i+'"></div>'
 				for (var m=0; m < marketList.length; m++){
 					
 					var marketId=marketList[m].split('<fd>')[0]
@@ -3314,7 +3315,7 @@ function tourCheckFirst(){
 				
 				
 				
-			nextMonthTable=nextMonthTable+selectCombo+'</br><input type="submit" style="width:30px;" value="OK" onClick="setDiv('+i+')" /></div><div id="nextShow'+i+'"></div></td></tr>'
+			nextMonthTable=nextMonthTable+selectCombo+'</br><input type="submit" style="width:30px;" value="OK" onClick="setDiv('+i+')" /><br><br></div></td></tr>'
 			
 			
 			
@@ -3410,10 +3411,14 @@ function setDiv(i){
 	}
 	$("#nextShow"+i).html(submitStr)
 	$("#next_"+i).hide();
+	$("#nextShow"+i).Show();
 }
 	
 function toggleDivNext(i){
 	$("#next_"+i).toggle();
+	
+	$("#nextShow"+i).Show();
+	alert ("#nextShow"+i)
 }
 function addMarketListTour() {
 	$("#wait_image_refresh").hide();
