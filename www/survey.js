@@ -6549,7 +6549,7 @@ function visitSubmit_doc(){
 	$("#errorChkVSubmit").text("");
 	
 	var visitClientId=localStorage.visit_client.split('|')[1]	
-	var visit_type=localStorage.visit_type
+	var visit_type="Schedule"
 	var scheduled_date=localStorage.scheduled_date
 	
 	
