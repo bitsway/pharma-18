@@ -2289,6 +2289,7 @@ function team(){
 
 
 function page_pending(){
+	$("#err_pendingTour").html('')
 	$("#err_pendingTour").show();
 	$("#wait_image_pendingTour").show();
 	//alert (localStorage.base_url+'tourPending?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode)
@@ -2321,8 +2322,11 @@ function page_pending(){
 											$("#wait_image_pendingTour").hide();
 											localStorage.repPending=resultArray[1];
 											
-											$('#tour_pending_combo_id_lv').empty()
-											$('#tour_pending_combo_id_lv').append(localStorage.repPending);
+											
+											//$('#tour_pending_combo_id_lv').empty()
+											//$('#tour_pending_combo_id_lv').append(localStorage.repPending);
+											$('#tour_pending_combo_id_lv').html(localStorage.repPending);
+											//$('#tour_pending_combo_id_lv').append(localStorage.repPending);
 										
 									
 										}
@@ -2679,19 +2683,18 @@ function repPendingDoc(rep_id){
 														var marketIdThisMonth=marketStrListThisMonth[m].split('<fd>')[0]
 														var marketNameThisMonth=marketStrListThisMonth[m].split('<fd>')[1]
 														var marketStatusThisMonth=marketStrListThisMonth[m].split('<fd>')[2]
-														//alert ('trst')
 														var marketIdShow='['+marketIdThisMonth+']'
 														if (marketNameThisMonth==''){ marketIdShow=''}
+
 														
-														//dayRoute=dayRoute+marketNameThisMonth+'['+marketIdThisMonth+']'+'----'+marketStatusThisMonth+'<br>'
-														dayRoute=dayRoute+marketNameThisMonth+marketIdShow+'<br>'
-														
-														//alert (dayRoute)
+														if (dayRoute==''){
+															dayRoute=marketNameThisMonth
+														}
+														else{
+															dayRoute=dayRoute+', '+marketNameThisMonth//+marketIdShow
+														}
 													}
-													//thisMonthTable=thisMonthTable+dayRoute+'<br>'
-													//thisMonthTable=thisMonthTable+'<font id="'+i+'editinfo">'+marketNameThisMonth+'['+marketIdThisMonth+']'+'----'+marketStatusThisMonth+'</font><br>'
-													
-													//alert (dateRouteSingle)
+
 												}
 												
 												thisMonthTable=thisMonthTable+'<font>'+dayRoute+'</font>'
@@ -3225,9 +3228,15 @@ function tourCheckFirst(){
 				var marketIdThisMonth=marketStrListThisMonth[m].split('<fd>')[0]
 				var marketNameThisMonth=marketStrListThisMonth[m].split('<fd>')[1]
 				var marketStatusThisMonth=marketStrListThisMonth[m].split('<fd>')[2]
-				dayRoute=dayRoute+marketNameThisMonth+'<br>'//+' ['+marketIdThisMonth+']'+'<br>'
+				//+' ['+marketIdThisMonth+']'+'<br>'
 				//dayRoute=dayRoute+marketNameThisMonth+'['+marketIdThisMonth+']'+'  '+marketStatusThisMonth+'<br>'
 				//alert (checkId)
+				if (dayRoute==''){
+					dayRoute=marketNameThisMonth
+				}
+				else{
+					dayRoute=dayRoute+', '+marketNameThisMonth
+				}
 			}
 			thisMonthTable=thisMonthTable+'<font id="'+i+'editinfo">'+dayRoute+'</font>'
 
@@ -3356,7 +3365,13 @@ function tourCheckFirst(){
 						var marketStatusNextMonth=marketStrListNextMonth[m].split('<fd>')[2]
 						var marketIdShowNext='['+marketIdNextMonth+']'
 						if (marketName==''){ marketIdShowNext=''}
-						dayRouteNext=dayRouteNext+marketNameNextMonth+'<br>'
+						if (dayRouteNext==''){
+							dayRouteNext=marketNameNextMonth
+						}
+						else{
+							dayRouteNext=dayRouteNext+', '+marketNameNextMonth
+						}
+						
 						//dayRouteNext=dayRouteNext+marketNameNextMonth+marketIdShowNext+'<br>'
 						//dayRoute=dayRoute+marketNameThisMonth+'['+marketIdThisMonth+']'+'  '+marketStatusThisMonth+'<br>'
 						//alert (checkId)
@@ -5515,13 +5530,8 @@ function repPendingDocView(rep_id){
 											var dayCheckFinal=year+'-'+monthCheck+'-'+dayCheck
 											
 											//alert (dayCheckFinal)
-											
-												
-											
-											
-											
-											
-											thisMonthTable=thisMonthTable+'<tr ><td width="50px">'+dayName+'</td><td width="30px">'+dayShow+'</td><td width="40%">'
+
+											thisMonthTable=thisMonthTable+'<tr ><td width="40px">'+dayName+'&nbsp;&nbsp;'+dayShow +'</td><td >'
 											//'Bashndhara<br> Nadda<br>'
 											if (docTThisMonthRow.indexOf('<'+dayCheckFinal+'>')!=-1){
 												var dateRouteSingle=docTThisMonthRow.split('<'+dayCheckFinal+'>')[1].split('</'+dayCheckFinal+'>')[0]
@@ -5532,8 +5542,13 @@ function repPendingDocView(rep_id){
 													var marketIdThisMonth=marketStrListThisMonth[m].split('<fd>')[0]
 													var marketNameThisMonth=marketStrListThisMonth[m].split('<fd>')[1]
 													var marketStatusThisMonth=marketStrListThisMonth[m].split('<fd>')[2]
-													
-													dayRoute=dayRoute+marketNameThisMonth+'['+marketIdThisMonth+']'+'----'+marketStatusThisMonth+'<br>'
+													if (dayRoute==''){
+														dayRoute=marketNameThisMonth
+													}
+													else{
+														dayRoute=dayRoute+', '+marketNameThisMonth
+													}
+													//dayRoute=dayRoute+'<font style="color:#900"> '+marketStatusThisMonth +'</font>'
 													//alert (checkId)
 												}
 												thisMonthTable=thisMonthTable+dayRoute+'<br>'
@@ -6700,19 +6715,15 @@ function visitSubmit_doc(){
 	}
 	
 	var msg=campaign_submit+'..'+gift_submit+'..'+sample_submit+'..'+notes+'..'+ppm_submit
-	//alert (campaign_submit)
-//	alert (gift_submit)
-//	alert (sample_submit)
-//	alert (ppm_submit)
 	
-	//msg1=msg.replace('undefined','');
-	//alert (msg1)
-	//$("#errorChkVSubmit").html(msg1);
+	var docVisitPhoto=$("#docVisitPhoto").val();
 	
-	var lscPhoto=$("#lscPhoto").val();
+	//alert (docVisitPhoto)
 	var lat=$("#lat").val();
 	var longitude=$("#longitude").val();
 	var now = $.now();
+	var imageName=localStorage.user_id+'_'+now+'_docVisit.jpg';
+	
 	var currentDate_1 = new Date()
 	var day_1 = currentDate_1.getDate();if(day_1.length==1)	{day_1="0" +day_1};
 	var month_1 = currentDate_1.getMonth() + 1;if(month_1.length==1)	{month_1="0" +month_1};
@@ -6772,7 +6783,7 @@ function visitSubmit_doc(){
 												//$("#errorChkVSubmit").html(msg1);
 												
 											// $("#errorChkVSubmit_doc_t").html(localStorage.base_url+'doctor_visit_submit_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&msg='+msg+'&lat='+lat+'&long='+longitude+'&v_with='+v_with+'&route='+market_Id+'&doc_others='+doc_others)
-											 $("#errorChkVSubmit_doc_t").val(localStorage.base_url+'doctor_visit_submit_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&msg='+encodeURI(msg)+'&lat='+lat+'&long='+longitude+'&v_with='+v_with+'&route='+market_Id+'&doc_others='+doc_others+'&location_detail='+localStorage.location_detail)
+											 $("#errorChkVSubmit_doc_t").val(localStorage.base_url+'doctor_visit_submit_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&msg='+encodeURI(msg)+'&lat='+lat+'&long='+longitude+'&v_with='+v_with+'&route='+market_Id+'&doc_others='+doc_others+'&location_detail='+localStorage.location_detail+'imageName='+imageName)
 												// ajax-------
 												//alert (localStorage.location_error);
 											if ( localStorage.location_error==2){
@@ -6781,7 +6792,7 @@ function visitSubmit_doc(){
 											else {	
 												$("#visit_submit_doc").hide();
 												$("#wait_image_visit_submit_doc").show();	
-										$.ajax(localStorage.base_url+'doctor_visit_submit_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&msg=' +encodeURI(msg)+'&lat='+lat+'&long='+longitude+'&v_with='+v_with+'&route='+market_Id+'&doc_others='+doc_others,{
+										$.ajax(localStorage.base_url+'doctor_visit_submit_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&msg=' +encodeURI(msg)+'&lat='+lat+'&long='+longitude+'&v_with='+v_with+'&route='+market_Id+'&doc_others='+doc_others+'&location_detail='+localStorage.location_detail+'imageName='+imageName,{
 										// cid:localStorage.cid,rep_id:localStorage.user_id,rep_pass:localStorage.user_pass,synccode:localStorage.synccode,
 										type: 'POST',
 										timeout: 30000,
@@ -6810,12 +6821,10 @@ function visitSubmit_doc(){
 													$("#visit_submit_doc").show();	
 												}
 											  else if (resultArray[0]=='SUCCESS'){
-																	
+												  
+													uploadPhoto_docVisit(docVisitPhoto, imageName);				
 													//-----------
 													localStorage.visit_client=''
-													
-												
-													
 													localStorage.visit_page=""
 													
 													localStorage.productGiftStr='';
@@ -9685,28 +9694,27 @@ function getDocppmDataPlan(){
 
 
 function getDocImage() {
-	//navigator.camera.getPicture(onSuccessProfile, onFailProfile, { quality: 10,
-		//destinationType: Camera.DestinationType.FILE_URI });
-   navigator.camera.getPicture(onSuccess_docVisitImage, onFail_docVisitImage, { quality: 90,
+	navigator.camera.getPicture( onSuccess_docVisitImage, onFail_docVisitImage, {
+		quality: 90,
 		targetWidth: 400,
-		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });
-		
+       // destinationType: Camera.DestinationType.FILE_URI,
+		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true ,
+        correctOrientation: true,
+        saveToPhotoAlbum: true
+    });
 }
 function onSuccess_docVisitImage(imageURI) {
-	//alert ('Success')
     var image = document.getElementById('myImageDoc');
     image.src = imageURI;
 	imagePath = imageURI;
-	$("#docVisitPhoto").val(imagePath);
-	
-
-		
+	$("#docVisitPhoto").val(imagePath);	
 }
 function onFail_docVisitImage(message) {
-	//alert ('Fail')
 	imagePath="";
     alert('Failed because: ' + message);
 }
+
+
 
 function getchAddImage() {
 	//navigator.camera.getPicture(onSuccessProfile, onFailProfile, { quality: 10,
@@ -10689,7 +10697,7 @@ function prescription_submit(){
 			//alert (imageName);
 				
 				
-				alert (localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&campaign_doc_str='+localStorage.prProdID_Str+'&opProdID_Str='+localStorage.opProdID_Str+'&medicine_1='+medicine_1+'&medicine_2='+medicine_2+'&medicine_3='+medicine_3+'&medicine_4='+medicine_4+'&medicine_5='+medicine_5+'&checkOther='+checkOther)							
+				//alert (localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&campaign_doc_str='+localStorage.prProdID_Str+'&opProdID_Str='+localStorage.opProdID_Str+'&medicine_1='+medicine_1+'&medicine_2='+medicine_2+'&medicine_3='+medicine_3+'&medicine_4='+medicine_4+'&medicine_5='+medicine_5+'&checkOther='+checkOther)							
 
 				 $.ajax(localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&campaign_doc_str='+localStorage.prProdID_Str+'&opProdID_Str='+localStorage.opProdID_Str+'&medicine_1='+medicine_1+'&medicine_2='+medicine_2+'&medicine_3='+medicine_3+'&medicine_4='+medicine_4+'&medicine_5='+medicine_5+'&checkOther='+checkOther,{
 								// cid:localStorage.cid,rep_id:localStorage.user_id,rep_pass:localStorage.user_pass,synccode:localStorage.synccode,
@@ -11484,7 +11492,33 @@ $.ajax(localStorage.base_url+'doctor_sync?cid='+localStorage.cid+'&rep_id='+loca
 						});			 
 
 }
-//========================================
+//========================================UploadImages================
+function uploadPhoto_docVisit(imageURI, imageName) {
+   // alert (localStorage.photo_submit_url)
+	var options = new FileUploadOptions();
+    options.fileKey="upload";
+    options.fileName=imageName;
+    options.mimeType="image/jpeg";
+	
+    var params = {};
+    params.value1 = "test";
+    params.value2 = "param";
+	
+    options.params = params;
+	options.chunkedMode = false;
+	
+    var ft = new FileTransfer();
+     ft.upload(imageURI, encodeURI(localStorage.photo_submit_url+"fileUploader_docVisit/"),winProfile,failProfile,options);
+	 
+}
+
+function winProfile(r) {
+}
+
+function failProfile(error) {
+	$("#error_prescription_submit").text('Memory Error. Please take new picture and Submit');
+}
+
 function uploadPhoto(imageURI, imageName) {
    // alert (localStorage.photo_submit_url)
 	var options = new FileUploadOptions();
@@ -11500,14 +11534,14 @@ function uploadPhoto(imageURI, imageName) {
 	options.chunkedMode = false;
 	
     var ft = new FileTransfer();
-     ft.upload(imageURI, encodeURI(localStorage.photo_submit_url+"fileUploaderPrescription/"),winProfile,failProfile,options);
+     ft.upload(imageURI, encodeURI(localStorage.photo_submit_url+"fileUploaderPrescription/"),winPr,failPr,options);
 	 
 }
 
-function winProfile(r) {
+function winPr(r) {
 }
 
-function failProfile(error) {
+function failPr(error) {
 	$("#error_prescription_submit").text('Memory Error. Please take new picture and Submit');
 }
 
