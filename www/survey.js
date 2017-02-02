@@ -225,10 +225,12 @@ $.afui.useOSThemes=false;
 	
 	
 	var currentDate = new Date()
-	var day = currentDate.getDate();if(day.length==1)	{day="0" +day_1};
-	var month = currentDate.getMonth() + 1;if(month.length==1)	{month="0" +month};
+	var day = currentDate.getDate();if(parseInt(day)<9)	{day="0" + day};
+	var month = currentDate.getMonth() + 1;if(parseInt(month)<9){month="0" +month};
 	var year = currentDate.getFullYear()
+	//alert (parseInt(day))
 	var today=  year + "-" + month + "-" + day
+	localStorage.today=today;
 							
 							
 	
@@ -240,13 +242,13 @@ $.afui.useOSThemes=false;
 			$("#cid").val(localStorage.cid);
 			$("#user_id").val(localStorage.user_id);
 			$("#user_pass").val(localStorage.user_pass);
-			//$.afui.loadContent("#pageHome",true,true,'right');
+			$.afui.loadContent("#pageHome",true,true,'right');
 			
 		}
 		//if ((localStorage.synced=='YES') & (localStorage.sync_date==today)){
-		if (localStorage.synced=='YES') {
-			$.afui.loadContent("#pageHome",true,true,'right');
-		}
+		//if (localStorage.synced=='YES') {
+//			$.afui.loadContent("#pageHome",true,true,'right');
+//		}
 		
 		
     });
@@ -280,21 +282,45 @@ function page_cancel_pending() {;
 	$.afui.loadContent("#page_cancel_pending",true,true,'right');
 }
 
-
+function page_doc_back(){
+	if (localStorage.docPage==1){
+		$.afui.loadContent("#page_market_ret",true,true,'right');
+	}
+	else{
+		page_saved_Doc();
+	}
+}
 function page_saved_Doc() {
-	//alert (localStorage.docSaveData)
+	localStorage.docPage=0
+	localStorage.scheduleDocFlag=1
 	var docSaveData=localStorage.docSaveData
+	//alert (docSaveData)
 	var docSaveDataList = docSaveData.split('<doc>');	
 	var docSaveDataListLength=docSaveDataList.length
 	var docSaveStr=''
-	
+	docSaveStr=docSaveStr+' <table bordercolor="#009999" style="color:#000091" height="30px" width="100%" border="1" cellpadding="0" cellspacing="0" style="border-radius:5px;">'
+	var currentDate = new Date()
+	var day = currentDate.getDate();if(parseInt(day)<9)	{day="0" + day};
+	var month = currentDate.getMonth() + 1;if(parseInt(month)<9){month="0" +month};
+	var year = currentDate.getFullYear()
+	//alert (parseInt(day))
+	var today=  year + "-" + month + "-" + day
+	//alert (today)
 	for ( i=0; i < docSaveDataListLength-1; i++){	
 		var singleDoc=docSaveDataList[i]
 		var docShowList=singleDoc.split('<d>');
-		//alert (docShowList[0])
-		//docSaveStr=docSaveStr+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin" > <table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-radius:5px;"><tr><td onClick="saved_Doc_set(\''+i+'\');">'+docShowList[0]+'</td><td width="60px"><input  type="submit" onClick="saveDelete_doc(\''+i+'\');"   style=" background-color:#09C; color:#FFF; font-size:12px; width:50px; ;  " value=" OK "    /></td></tr></table></li>'
-		docSaveStr=docSaveStr+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin" > <table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-radius:5px;"><tr><td onClick="saved_Doc_set(\''+i+'\');">'+docShowList[0]+'</td><td width="60px"></td></tr></table></li>'
+		
+		//alert (docShowList[4]+'           '+today)
+		if (today==docShowList[4]){
+			//alert ('Yea')
+			docSaveStr=docSaveStr+' <tr><td  height="30px" onClick="saved_Doc_set(\''+i+'\');">'+docShowList[0]+'</td></tr>'
+		}
+		else{
+			//alert ('No')
+			docSaveStr=docSaveStr+' <tr><td style="color:#900;" height="30px" >'+docShowList[0] +' [Tomorrow]'+'</td></tr>'
+		}
 	}
+	docSaveStr=docSaveStr+'</table>'
 	$('#saved_visit_doc').empty()
 	$('#saved_visit_doc').append(docSaveStr);									
 	$.afui.loadContent("#page_saved_Doc",true,true,'right');
@@ -311,12 +337,17 @@ function saveDelete_doc(i) {
 	var docSaveDataList = docSaveData.split('<doc>');	
 	var docSaveDataListLength=docSaveDataList.length
 	var docSaveStr=''
+	docSaveStr=docSaveStr+' <table bordercolor="#009999" style="color:#000091" height="30px" width="100%" border="1" cellpadding="0" cellspacing="0" style="border-radius:5px;">'
 	for ( i=0; i < docSaveDataListLength-1; i++){	
 		var singleDoc=docSaveDataList[i]
 		var docShowList=singleDoc.split('<d>');
+		
 		//alert (singleDoc)
-		docSaveStr=docSaveStr+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin" > <table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-radius:5px;"><tr><td onClick="saved_Doc_set(\''+i+'\');">'+docShowList[0]+'</td><td width="60px"><input  type="submit" onClick="saveDelete_doc(\''+i+'\');"   style=" background-color:#09C; color:#FFF; font-size:12px; width:50px; ;  " value=" OK "    /></td></tr></table></li>'
+		//docSaveStr=docSaveStr+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin" > <table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-radius:5px;"><tr><td onClick="saved_Doc_set(\''+i+'\');">'+docShowList[0]+'</td><td width="60px"><input  type="submit" onClick="saveDelete_doc(\''+i+'\');"   style=" background-color:#09C; color:#FFF; font-size:12px; width:50px; ;  " value=" OK "    /></td></tr></table></li>'
+		
+		docSaveStr=docSaveStr+'<tr><td onClick="saved_Doc_set(\''+i+'\');">'+docShowList[0]+'</td></tr>'
 	}
+	docSaveStr=docSaveStr+'</table>'
 	$('#saved_visit_doc').empty()
 	$('#saved_visit_doc').append(docSaveStr);				
 	
@@ -350,7 +381,8 @@ function saved_Doc_set(i) {
 	
 	
 	//alert ('sadasf')
-	localStorage.visit_client=docShowList[0]
+	localStorage.visit_client=docShowList[15]
+	//alert (localStorage.visit_client)
 	localStorage.visit_type=visit_type
 	localStorage.scheduled_date=scheduled_date
 	localStorage.campaign_doc_str=campaign_doc_str
@@ -388,11 +420,12 @@ function saved_Doc_set(i) {
 
 function homePage() {
 	var currentDate = new Date()
-	var day = currentDate.getDate();if(day.length==1)	{day="0" +day};
-	var month = currentDate.getMonth() + 1;if(month.length==1)	{month="0" +month};
+	var day = currentDate.getDate();if(parseInt(day)<9)	{day="0" + day};
+	var month = currentDate.getMonth() + 1;if(parseInt(month)<9){month="0" +month};
 	var year = currentDate.getFullYear()
+	//alert (parseInt(day))
 	var today=  year + "-" + month + "-" + day
-							
+	localStorage.today=today;						
 
 	//if ((localStorage.synced=='YES') & (localStorage.sync_date==today)){
 	if (localStorage.synced=='YES'){
@@ -1460,6 +1493,7 @@ function check_user() {
 										}
 										else if (resultArray[0]=='SUCCESS'){
 													afterSync()
+													
 													localStorage.synccode=resultArray[1];
 													localStorage.marketListStr=resultArray[2];
 													//alert (resultArray[2]);
@@ -1693,8 +1727,8 @@ function check_user() {
 																todayFlag=1
 															}
 															if (docMarketID!=''){
-																docMarketComb+='<li class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-location" style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><a onClick="marketNextLV(\''+docmarketNameID+'\')"><font class="name" style="font-size:18; font-weight:bold">'+docMarketName+'</a></font></li>';
-																
+																docMarketComb+='<li class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-location" style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><a onClick="setScheduleDate(\''+docMarketDate+'\');marketNextLV(\''+docmarketNameID+'\');"><font class="name" style="font-size:18; font-weight:bold">'+docMarketName+'</a></font></li>';
+															//alert (docMarketComb)	
 																}
 														}
 														
@@ -2109,6 +2143,11 @@ localStorage.report_button=' <input type="submit" id="loginButton" onClick="s_or
 		
 		
 }//Function
+
+function setScheduleDate(scheduleDate){
+	localStorage.scheduled_date=scheduleDate;
+	//alert (localStorage.scheduled_date)
+}
 //=================Bonus Combo==========
 //function bonusCombo(){
 //	var promo_str=localStorage.promo_str;
@@ -2188,12 +2227,13 @@ function doctor_visit_plan() {
 	localStorage.saved_data_submit=0;
 	localStorage.doctor_pr=0;
 	localStorage.visit_page="NO";
+	localStorage.scheduleDocFlag=1
 	//addMarketList();
 	addMarketListDoctor()
-	$("#addDocanc").show();
+	$("#addDocanc").hide();
 	$("#blankAnc").hide();
-	$("#dPending").show();
-	$("#dBlank").hide();
+	$("#dPending").hide();
+	$("#dBlank").show();
 	
 }
 function doctor_visit() {
@@ -2207,6 +2247,7 @@ function doctor_visit() {
 	localStorage.tourFlag=0
 	localStorage.saved_data_submit=0;
 	localStorage.visit_page="NO";
+	localStorage.scheduleDocFlag=0
 	//addMarketList();
 	if (localStorage.doctor_flag==1 && localStorage.cTeam==1) {addMarketListCteam();}else{addMarketList();}
 	
@@ -4665,7 +4706,7 @@ function marketNext_doc() {
 	
 	market_name=$("#unschedule_market_combo_id").val();
 	localStorage.visit_market_show=market_name
-	//alert (localStorage.visit_market_show)
+	
 	if(market_name=='' || market_name==0){
 			$("#err_market_next").text("Market required");
 		}else{
@@ -4677,8 +4718,19 @@ function marketNext_doc() {
 			var marketNameId=market_name.split('|');
 			var market_Id=marketNameId[1];
 			
-			var visit_type="Unscheduled";
-			var scheduled_date="";
+			var visit_type="Scheduled";
+			var scheduled_date=localStorage.scheduled_date;
+			var currentDate = new Date()
+			var day = currentDate.getDate();if(parseInt(day) > 9)	{day="0" +day};
+			var month = currentDate.getMonth() + 1;if(parseInt(month) > 9)	{month="0" +month};
+			var year = currentDate.getFullYear()
+			var today=  year + "-" + month + "-" + day
+			
+			if (localStorage.scheduleDocFlag==0){
+				scheduled_date=today
+				visit_type='Unschedule'
+				
+			}
 			//var unscheduled_m_client_combo_ob=$('#unscheduled_m_client_combo_id_lv');
 //			unscheduled_m_client_combo_ob.empty()
 		
@@ -4756,7 +4808,7 @@ function marketNext_doc() {
 									$("#btn_unschedule_market").show();
 									
 									//------- 
-								
+								//alert (localStorage.scheduled_date)
 									$.afui.loadContent("#page_market_ret",true,true,'right');
 									unscheduled_m_client_combo_ob.listview("refresh");
 									
@@ -4775,7 +4827,7 @@ function marketNext_doc() {
 //==============================Doctor==========
 
 function marketRetailerNext_doc() {
-	
+		localStorage.docPage=1
 		localStorage.saveSubmitDocFlag=0;
 		localStorage.saveSubmitDocI=''
 		$("#err_m_retailer_next").text("");
@@ -4836,7 +4888,7 @@ function marketRetailerNext_doc() {
 			$("#errorChkVSubmit_doc").html('');
 			
 			$("#wait_image_visit_submit_doc").hide();
-			//alert (localStorage.doctor_plan_flag)
+			
 			if (localStorage.doctor_pr==1){
 				$("#wait_image_prescription").hide();
 				
@@ -4845,7 +4897,8 @@ function marketRetailerNext_doc() {
 	
 			else if (localStorage.doctor_plan_flag==1){
 				$("#visit_submit_doc").hide();
-				$("#visit_submit_save_doc").show();		
+				$("#visit_submit_save_doc").show();	
+				
 				$.afui.loadContent("#page_visit_doc",true,true,'right');
 				
 			}
@@ -6550,6 +6603,9 @@ function visitSubmit_doc(){
 	
 	var visitClientId=localStorage.visit_client.split('|')[1]	
 	var visit_type="Schedule"
+	if (localStorage.scheduleDocFlag==0){
+		visit_type="Unschedule"
+	}
 	var scheduled_date=localStorage.scheduled_date
 	
 	
@@ -6977,9 +7033,10 @@ function saveDocvisit(){
 	$("#errorChkVSubmit").text("");
 	
 	visitClientId=localStorage.visit_client.split('|')[1]	
+	visitClientName=localStorage.visit_client.split('|')[0]
 	visit_type=localStorage.visit_type
 	scheduled_date=localStorage.scheduled_date
-
+	//alert (localStorage.scheduled_date)
 	ppm_doc_Str=localStorage.productppmStr;
 
 	notes= $("#doc_feedback").val();
@@ -7028,11 +7085,13 @@ function saveDocvisit(){
 						var  docSaveData=localStorage.docSaveData
 						
 						if (docSaveData.indexOf(localStorage.visit_client) !=-1){
-							docSaveDataList = docSaveData.split('<doc>');	
-							for ( i=0; i < docSaveDataList.length; i++){
-								//alert (docSaveData.indexOf(localStorage.visit_client))
-								var visit_client = docSaveDataList[i].split('<d>')[0];
-								if (visit_client==localStorage.visit_client){
+							docSaveDataList = docSaveData.split('<doc>');
+							//alert (docSaveDataList.length)	
+							for ( i=0; i < docSaveDataList.length-1; i++){
+								//alert (docSaveDataList[i])
+								var visit_client = docSaveDataList[i].split('<d>')[15];
+								//alert (visit_client+'     '+localStorage.visit_client+'-----------'+scheduled_date+'    '+localStorage.today)
+								if ((visit_client==localStorage.visit_client) && (scheduled_date==localStorage.today)){
 									var replaceStr=docSaveDataList[i]+'<doc>'
 									docSaveData=docSaveData.replace(replaceStr,'')
 									localStorage.docSaveData=docSaveData
@@ -7040,12 +7099,12 @@ function saveDocvisit(){
 							}
 						}
 									
-						 $("#errorChkVSubmit_doc_t").val(docSaveData+localStorage.visit_client+'<d>'+localStorage.visit_market_show+'<d>'+visitClientId+'<d>'+visit_type+'<d>'+scheduled_date+'<d>'+localStorage.productSampleStr+'<d>'+localStorage.productGiftStr+'<d>'+localStorage.campaign_doc_str+'<d>'+localStorage.productppmStr+'<d>'+notes+'<d>'+lat+'<d>'+longitude+'<d>'+v_with+'<d>'+market_Id+'<d>'+doc_others+'<doc>')
+						// alert (docSaveData+visitClientName+'<d>'+localStorage.visit_market_show+'<d>'+visitClientId+'<d>'+visit_type+'<d>'+scheduled_date+'<d>'+localStorage.productSampleStr+'<d>'+localStorage.productGiftStr+'<d>'+localStorage.campaign_doc_str+'<d>'+localStorage.productppmStr+'<d>'+notes+'<d>'+lat+'<d>'+longitude+'<d>'+v_with+'<d>'+market_Id+'<d>'+doc_others+'<d>'+localStorage.visit_client+'<doc>')
 			
 							//var docSaveData=localStorage.docSaveData
 							//alert (localStorage.visit_client+'<d>'+visitClientId+'<d>'+visit_type+'<d>'+scheduled_date+'<d>'+encodeURI(msg)+'<d>'+lat+'<d>'+longitude+'<d>'+v_with+'<d>'+market_Id+'<d>'+doc_others+'<doc>')
 							//alert ('sdas')
-							var doctor_visit_save=docSaveData+localStorage.visit_client+'<d>'+localStorage.visit_market_show+'<d>'+visitClientId+'<d>'+visit_type+'<d>'+scheduled_date+'<d>'+localStorage.productSampleStr+'<d>'+localStorage.productGiftStr+'<d>'+localStorage.campaign_doc_str+'<d>'+localStorage.productppmStr+'<d>'+notes+'<d>'+lat+'<d>'+longitude+'<d>'+v_with+'<d>'+market_Id+'<d>'+doc_others+'<doc>'
+							var doctor_visit_save=docSaveData+visitClientName+'<d>'+localStorage.visit_market_show+'<d>'+visitClientId+'<d>'+visit_type+'<d>'+scheduled_date+'<d>'+localStorage.productSampleStr+'<d>'+localStorage.productGiftStr+'<d>'+localStorage.campaign_doc_str+'<d>'+localStorage.productppmStr+'<d>'+notes+'<d>'+lat+'<d>'+longitude+'<d>'+v_with+'<d>'+market_Id+'<d>'+doc_others+'<d>'+localStorage.visit_client+'<doc>'
 							
 							localStorage.docSaveData=doctor_visit_save
 					//alert (localStorage.docSaveData)
