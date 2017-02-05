@@ -203,7 +203,56 @@ $.afui.useOSThemes=false;
 		}
 		
 		//reports();
+	//===============SetPR=================
+	for (j=0; j < 10; j++){
+		var picNo=parseInt(j)+1 
+		var imageDiv="myImage"+picNo
+		var imageText="prPhoto"+picNo
+		var imageSource=''
+		
+		
+		if (picNo==1){
+			imageSource=localStorage.prPhoto1
+		}
+		if (picNo==2){
+			imageSource=localStorage.prPhoto2
+		}
+		if (picNo==3){
+			imageSource=localStorage.prPhoto3
+		}
+		if (picNo==4){
+			imageSource=localStorage.prPhoto4
+		}
+		if (picNo==5){
+			imageSource=localStorage.prPhoto5
+		}
+		if (picNo==6){
+			imageSource=localStorage.prPhoto6
+		}
+		if (picNo==7){
+			imageSource=localStorage.prPhoto7
+		}
+		if (picNo==8){
+			imageSource=localStorage.prPhoto8
+		}
+		if (picNo==9){
+			imageSource=localStorage.prPhoto9
+		}
+		if (picNo==10){
+			imageSource=localStorage.prPhoto10
+		}
+		
+		
+		
+		var image = document.getElementById(imageDiv);
+		image.src = imageSource;
+		imagePath = imageSource;
+		$("#"+imageText).val(imagePath);
+	}
+
 	
+	
+//	===========================================
 	
 	$('#order_report_button').empty();
 	$('#order_report_button').append(localStorage.report_button).trigger('create');
@@ -242,7 +291,16 @@ $.afui.useOSThemes=false;
 			$("#cid").val(localStorage.cid);
 			$("#user_id").val(localStorage.user_id);
 			$("#user_pass").val(localStorage.user_pass);
+			if (localStorage.user_type=='sup'){
+			$("#chemisVDiv").hide();
+			$("#chSaveDiv").hide();
 			$.afui.loadContent("#pageHome",true,true,'right');
+		}
+		else{
+			$("#chemisVDiv").show();
+			$("#chSaveDiv").show();
+		}
+			
 			
 		}
 		//if ((localStorage.synced=='YES') & (localStorage.sync_date==today)){
@@ -429,6 +487,15 @@ function homePage() {
 
 	//if ((localStorage.synced=='YES') & (localStorage.sync_date==today)){
 	if (localStorage.synced=='YES'){
+		if (localStorage.user_type=='sup'){
+			$("#chemisVDiv").hide();
+			$("#chSaveDiv").hide();
+		}
+		else{
+			$("#chemisVDiv").show();
+			$("#chSaveDiv").show();
+		}
+		
 		$.afui.loadContent("#pageHome",true,true,'right');
 	}
 	
@@ -1369,6 +1436,18 @@ function afterSync(){
 		localStorage.market_doctorVisit=''
 		
 		localStorage.picFlag=0;
+		
+		localStorage.prPhoto1=''
+		localStorage.prPhoto2=''
+		localStorage.prPhoto3=''
+		localStorage.prPhoto4=''
+		localStorage.prPhoto5=''
+		localStorage.prPhoto6=''
+		localStorage.prPhoto7=''
+		localStorage.prPhoto8=''
+		localStorage.prPhoto9=''
+		localStorage.prPhoto10=''
+
 }
 function check_user() {	
 	var cid=$("#cid").val().toUpperCase();
@@ -1385,7 +1464,7 @@ function check_user() {
 	
 	
 
-   var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
+   var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_20150502/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
  
 	
 	var user_id=$("#user_id").val();
@@ -2117,6 +2196,14 @@ localStorage.report_button=' <input type="submit" id="loginButton" onClick="s_or
 													 checkRequest()
 													}
 													checkInbox();
+													if (localStorage.user_type=='sup'){
+			$("#chemisVDiv").hide();
+			$("#chSaveDiv").hide();
+		}
+		else{
+			$("#chemisVDiv").show();
+			$("#chSaveDiv").show();
+		}
 													$.afui.loadContent("#pageHome",true,true,'right');
 													
 													set_doc_all();
@@ -3017,6 +3104,18 @@ function repCancelReqSubmit(){
 	var year =d.getFullYear();
 	var schDate=year+'-'+month+'-'+dayNameedit
 	
+	
+	comboValue= $("#othersAll").val();
+	if (comboValue!=''){
+		uncheckAll('amndReq')
+		if (submitStr==''){
+			submitStr=comboValue+'<fd>'+comboValue
+		}
+		else{
+			submitStr=submitStr+'<rd>'+comboValue+'<fd>'+comboValue
+		}
+		
+	}
 	//alert (month)
 	var marketList=(localStorage.marketTourStr).split('<rd>')
 	var submitStr=''	
@@ -3039,17 +3138,8 @@ function repCancelReqSubmit(){
 		
 	}
 	
-	comboValue= $("#othersAll").val();
-	if (comboValue!=''){
-		
-		if (submitStr==''){
-			submitStr=comboValue+'<fd>'+comboValue
-		}
-		else{
-			submitStr=submitStr+'<rd>'+comboValue+'<fd>'+comboValue
-		}
-		
-	}
+	
+	
 	
 	submitStr=schDate+'<date>'+submitStr
 	//checkLeave = $("#amndleav").prop("checked");
@@ -10105,7 +10195,7 @@ function page_PrescriptionCapture() {
 
 function setPicture(){
 localStorage.picFlag=0;
-for (j=0; j < 25; j++){
+for (j=0; j < 10; j++){
 		var picNo=parseInt(j)+1 
 		var imageDiv="myImage"+picNo
 		var imageText="prPhoto"+picNo
@@ -10828,8 +10918,37 @@ function prescription_submit(){
 											setPrProduct()
 
 											//--------------------------
-	
-											
+											if (picNo==1){localStorage.prPhoto1=''}
+											if (picNo==2){localStorage.prPhoto2=''}
+											if (picNo==3){localStorage.prPhoto3=''}
+											if (picNo==4){localStorage.prPhoto4=''}
+											if (picNo==5){localStorage.prPhoto5=''}
+											if (picNo==6){localStorage.prPhoto6=''}
+											if (picNo==7){localStorage.prPhoto7=''}
+											if (picNo==8){localStorage.prPhoto8=''}
+											if (picNo==9){localStorage.prPhoto9=''}
+											if (picNo==10){localStorage.prPhoto10=''}
+											for (j=0; j < 10; j++){
+												var picNoGet=parseInt(j)+1 
+												var imageDiv="myImage"+picNoGet
+												var imageText="prPhoto"+picNoGet
+												var imageSource=''
+												if (picNoGet==1){imageSource=localStorage.prPhoto1}
+												if (picNoGet==2){imageSource=localStorage.prPhoto2}
+												if (picNoGet==3){imageSource=localStorage.prPhoto3}
+												if (picNoGet==4){imageSource=localStorage.prPhoto4}
+												if (picNoGet==5){imageSource=localStorage.prPhoto5}
+												if (picNoGet==6){imageSource=localStorage.prPhoto6}
+												if (picNoGet==7){imageSource=localStorage.prPhoto7}
+												if (picNoGet==8){imageSource=localStorage.prPhoto8}
+												if (picNoGet==9){imageSource=localStorage.prPhoto9}
+												if (picNoGet==10){imageSource=localStorage.prPhoto10}
+												
+												var image = document.getElementById(imageDiv);
+												image.src = imageSource;
+												imagePath = imageSource;
+												$("#"+imageText).val(imagePath);
+											}
 
 											$.afui.loadContent("#page_confirm_visit_success",true,true,'right');
 											
@@ -11625,7 +11744,36 @@ function cameraSuccess(uri){
 	var image = document.getElementById(imageDiv);
 	image.src = uri;
 	imagePath = uri;
-	
+	if (picNo==1){
+		localStorage.prPhoto1=imageText
+	}
+	if (picNo==2){
+		localStorage.prPhoto2=imageText
+	}
+	if (picNo==3){
+		localStorage.prPhoto3=imageText
+	}
+	if (picNo==4){
+		localStorage.prPhoto4=imageText
+	}
+	if (picNo==5){
+		localStorage.prPhoto5=imageText
+	}
+	if (picNo==6){
+		localStorage.prPhoto6=imageText
+	}
+	if (picNo==7){
+		localStorage.prPhoto7=imageText
+	}
+	if (picNo==8){
+		localStorage.prPhoto8=imageText
+	}
+	if (picNo==9){
+		localStorage.prPhoto9=imageText
+	}
+	if (picNo==10){
+		localStorage.prPhoto10=imageText
+	}
 	//alert (uri)
 	takePicture();
 	
