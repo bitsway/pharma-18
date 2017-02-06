@@ -242,12 +242,12 @@ $.afui.useOSThemes=false;
 			imageSource=localStorage.prPhoto10
 		}
 		
-		
-		
+		//alert (imageSource)
 		var image = document.getElementById(imageDiv);
 		image.src = imageSource;
 		imagePath = imageSource;
 		$("#"+imageText).val(imagePath);
+		
 	}
 
 	
@@ -1025,6 +1025,7 @@ function onError_ready(error) {
 	
     $("#checkLocation_doc").html('');
 	$("#wait_image_visit_submit_doc").hide();
+	alert ("Please on your GPS")
 	//$("#visit_submit_doc").show();
 	//$("#visit_location_doc").hide();
 }
@@ -1464,7 +1465,7 @@ function check_user() {
 	
 	
 
-   var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
+  var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
  
 	
 	var user_id=$("#user_id").val();
@@ -2880,11 +2881,11 @@ function reports() {
 	var str_report_rep='<table width="100%" border="0">'+
 					 '<tr><td>ID: </td><td><input id="se_mpo_doc" name="se_mpo_doc" type="text" readonly="true" placeholder="Rep">'+
 					  '<input id="se_item_doc" name="se_item_doc" type="hidden" placeholder="Item"></td></tr>'+
-					   '<tr><td>Teritory: </td><td><input id="se_market_doc" name="se_market_doc" type="text" placeholder="Market"  ></td></tr></table>'
+					   '<tr><td>BaseCode: </td><td><input id="se_market_doc" name="se_market_doc" type="text" placeholder="Market"  ></td></tr></table>'
 	var str_report_sup='<table width="100%" border="0">'+
 					   '<tr><td>ID: </td><td><input id="se_mpo_doc" name="se_mpo_doc" type="text" placeholder="Rep">'+
 					   '<input id="se_item_doc" name="se_item_doc" type="hidden" placeholder="Item"></td></tr>	'+
-					   '<tr><td>Teritory: </td><td><input id="se_market_doc" name="se_market_doc" type="text" placeholder="Market/level"  ></td></tr></table>'	
+					   '<tr><td>BaseCode: </td><td><input id="se_market_doc" name="se_market_doc" type="text" placeholder="Market/level"  ></td></tr></table>'	
 	
 	if (localStorage.user_type=='rep'){
 		localStorage.str_report=str_report_rep;
@@ -8209,19 +8210,19 @@ function set_report_parameter_doctor() {
 	localStorage.se_market_report_doc=se_market_report_doc;
 	
 	
-	$("#report_market_doctor").html("Teritory :"+localStorage.se_market_report_doc);
+	$("#report_market_doctor").html("BaseCode :"+localStorage.se_market_report_doc);
 	$("#report_mpo_doctor").html("ID :"+localStorage.rep_id_report_doc);
 	$("#date_f_doctor").html("DateFrom :"+date_from_show_doc);
 	$("#date_t_doctor").html("DateTo :"+date_to_show_doc);
 	
-	$("#report_market_prescription").html("Teritory :"+localStorage.se_market_report_doc);
+	$("#report_market_prescription").html("BaseCode :"+localStorage.se_market_report_doc);
 	$("#report_mpo_prescription").html("ID :"+localStorage.rep_id_report_doc);
 	$("#date_f_prescription").html("DateFrom :"+date_from_show_doc);
 	$("#date_t_prescription").html("DateTo :"+date_to_show_doc);
 	
 	
 	
-	$("#report_market").html("Teritory :"+localStorage.se_market_report_doc);
+	$("#report_market").html("BaseCode :"+localStorage.se_market_report_doc);
 	$("#report_mpo").html("ID :"+localStorage.rep_id_report_doc);
 	$("#date_f").html("DateFrom :"+date_from_show_doc);
 	$("#date_t").html("DateTo :"+date_to_show_doc);
@@ -8598,7 +8599,7 @@ function set_report_parameter() {
 	localStorage.se_market_report=se_market_report;
 	
 	
-	$("#report_market").html("Teritory :"+localStorage.se_market_report);
+	$("#report_market").html("BaseCode :"+localStorage.se_market_report);
 	$("#report_item").html("Item :"+localStorage.se_item_report);
 	$("#report_mpo").html("ID :"+localStorage.rep_id_report);
 	$("#date_f").html("DateFrom :"+date_from_show);
@@ -11745,34 +11746,34 @@ function cameraSuccess(uri){
 	image.src = uri;
 	imagePath = uri;
 	if (picNo==1){
-		localStorage.prPhoto1=imageText
+		localStorage.prPhoto1=uri
 	}
 	if (picNo==2){
-		localStorage.prPhoto2=imageText
+		localStorage.prPhoto2=uri
 	}
 	if (picNo==3){
-		localStorage.prPhoto3=imageText
+		localStorage.prPhoto3=uri
 	}
 	if (picNo==4){
-		localStorage.prPhoto4=imageText
+		localStorage.prPhoto4=uri
 	}
 	if (picNo==5){
-		localStorage.prPhoto5=imageText
+		localStorage.prPhoto5=uri
 	}
 	if (picNo==6){
-		localStorage.prPhoto6=imageText
+		localStorage.prPhoto6=uri
 	}
 	if (picNo==7){
-		localStorage.prPhoto7=imageText
+		localStorage.prPhoto7=uri
 	}
 	if (picNo==8){
-		localStorage.prPhoto8=imageText
+		localStorage.prPhoto8=uri
 	}
 	if (picNo==9){
-		localStorage.prPhoto9=imageText
+		localStorage.prPhoto9=uri
 	}
 	if (picNo==10){
-		localStorage.prPhoto10=imageText
+		localStorage.prPhoto10=uri
 	}
 	//alert (uri)
 	takePicture();
