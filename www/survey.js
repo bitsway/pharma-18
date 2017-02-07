@@ -1458,12 +1458,7 @@ function check_user() {
 
 	
 	//var  apipath_base_photo_dm='http://127.0.0.1:8000/demo/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
-	//var  apipath_base_photo_dm='http://c003.cloudapp.net/demo/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
-	
-	
-	//var  apipath_base_photo_dm='http://a007.yeapps.com/acme/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
-	
-	
+
 
   var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
  
@@ -3565,7 +3560,7 @@ function toggleDivNext(i){
 	$("#next_"+i).toggle();
 	
 	$("#nextShow"+i).Show();
-	alert ("#nextShow"+i)
+	//alert ("#nextShow"+i)
 }
 function addMarketListTour() {
 	$("#wait_image_refresh").hide();
@@ -5440,14 +5435,14 @@ $("#err_marketTour").html('');
 	for (var i=0; i < daysNext; i++){
 		var dayShow=i+1
 		var dateNextMonth = yearNext+'-'+monthNextGet+'-'+dayShow;
-
+		var checkFlag=1
 
 		var marketList=(localStorage.marketTourStr).split('<rd>')
 		var comboValue=''
 		comboValue= $("#othersAll"+i).val();
 		//alert (comboValue)
 			for (var m=0; m < marketList.length; m++){
-				var checkFlag=1
+				
 				var dateGet=''
 				
 				var marketId=marketList[m].split('<fd>')[0]
@@ -5479,6 +5474,7 @@ $("#err_marketTour").html('');
 						}
 					
 				}
+		//alert (checkFlag)
 		if ((comboValue=='') && (checkFlag==1)){errFlag=1}
 			
 	}
@@ -9502,7 +9498,7 @@ function page_dList() {
 	  var market_Id=localStorage.visit_market_show.split('|')[1];
 	//var visitDocId=localStorage.visit_client.split('|')[1]	
 	$("#error_dListTxt").val(localStorage.report_url+'doc_list?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode)
-	
+	//alert (localStorage.report_url+'doc_list?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode)
   $.ajax(localStorage.report_url+'doc_list?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode,{
 
 								type: 'POST',
@@ -10890,6 +10886,16 @@ function prescription_submit(){
 											image.src = imageSource;
 											imagePath = imageSource;
 											$("#"+imageText).val(imagePath);
+											if (picNo==1){localStorage.prPhoto1=''}
+											if (picNo==2){localStorage.prPhoto2=''}
+											if (picNo==3){localStorage.prPhoto3=''}
+											if (picNo==4){localStorage.prPhoto4=''}
+											if (picNo==5){localStorage.prPhoto5=''}
+											if (picNo==6){localStorage.prPhoto6=''}
+											if (picNo==7){localStorage.prPhoto7=''}
+											if (picNo==8){localStorage.prPhoto8=''}
+											if (picNo==9){localStorage.prPhoto9=''}
+											if (picNo==10){localStorage.prPhoto10=''}
 
 				
 											
