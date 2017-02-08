@@ -286,21 +286,23 @@ $.afui.useOSThemes=false;
 		//currentDate=2016-03-11
 		//localStorage.synced=''
 		//alert (today);
-		//alert (localStorage.sync_date);
-		if ((localStorage.synced=='YES')){
+		//alert (localStorage.synced);
+		if (localStorage.synced=='YES'){
 			$("#cid").val(localStorage.cid);
 			$("#user_id").val(localStorage.user_id);
 			$("#user_pass").val(localStorage.user_pass);
 			if (localStorage.user_type=='sup'){
 			$("#chemisVDiv").hide();
 			$("#chSaveDiv").hide();
-			$.afui.loadContent("#pageHome",true,true,'right');
-		}
-		else{
-			$("#chemisVDiv").show();
-			$("#chSaveDiv").show();
-		}
 			
+			
+			}
+			else{
+				$("#chemisVDiv").show();
+				$("#chSaveDiv").show();
+			}
+			//alert (localStorage.synced)
+			$.afui.loadContent("#pageHome",true,true,'right');
 			
 		}
 		//if ((localStorage.synced=='YES') & (localStorage.sync_date==today)){
@@ -371,11 +373,11 @@ function page_saved_Doc() {
 		//alert (docShowList[4]+'           '+today)
 		if (today==docShowList[4]){
 			//alert ('Yea')
-			docSaveStr=docSaveStr+' <tr><td  height="30px" onClick="saved_Doc_set(\''+i+'\');">'+docShowList[0]+'</td></tr>'
+			docSaveStr=docSaveStr+' <tr onClick="saved_Doc_set(\''+i+'\');"><td  height="30px" >'+docShowList[0]+'</td><td align="center" style="background-color:#006464; color:#FFF; font-size:20px; border-right:hidden"> >></td></tr>'
 		}
 		else{
 			//alert ('No')
-			docSaveStr=docSaveStr+' <tr><td style="color:#900;" height="30px" >'+docShowList[0] +' [Tomorrow]'+'</td></tr>'
+			docSaveStr=docSaveStr+' <tr><td style="color:#900;" height="30px" >'+docShowList[0] +' [Tomorrow]'+'</td><td align="center" style=" border-left:hidden"></td></tr>'
 		}
 	}
 	docSaveStr=docSaveStr+'</table>'
@@ -10794,6 +10796,35 @@ function removeCarItemPr(product_idGet){
 	//alert (localStorage.prProdID_Str)
 }
 function mp() {
+	var doctorId=localStorage.visit_client.split('|')[1]	
+	var areaId=localStorage.visit_market_show.split('|')[1]
+	
+	//alert (localStorage.base_url+'mp_doctor?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId))
+	$.ajax(localStorage.base_url+'mp_doctor?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId),{
+			type: 'POST',
+			timeout: 30000,
+			error: function(xhr) {
+						var resultArray = data.split('<SYNCDATA>');
+						$("#myDiv").html(resultArray[1]);		
+			},
+		success:function(data, status,xhr){				
+			if (status!='success'){
+				$("#myDiv").html('Network timeout. Please ensure you have active internet connection.');
+			}
+			else{
+				   var resultArray = data.split('<SYNCDATA>');	
+					if (resultArray[0]=='FAILED'){						
+						$("#myDiv").html(resultArray[1]);
+					}else if (resultArray[0]=='SUCCESS'){									
+						$("#myDiv").html(resultArray[1]);
+						
+	
+					}else{						
+						$("#myDiv").html('Authentication error. Please register and sync to retry.');
+						}
+			}
+}
+	});	
 	$("#myDiv").toggle();
 }
 function prescription_submit(){
