@@ -1450,7 +1450,36 @@ function afterSync(){
 		localStorage.prPhoto8=''
 		localStorage.prPhoto9=''
 		localStorage.prPhoto10=''
-
+		
+		
+		//Oppertunuty
+		localStorage.op_A=''
+		localStorage.op_B=''
+		localStorage.op_C=''
+		localStorage.op_D=''
+		localStorage.op_E=''
+		localStorage.op_F=''
+		localStorage.op_G=''
+		localStorage.op_H=''
+		localStorage.op_I=''
+		localStorage.op_J=''
+		localStorage.op_K=''
+		localStorage.op_L=''
+		localStorage.op_M=''
+		localStorage.op_N=''
+		localStorage.op_O=''
+		localStorage.op_P=''
+		localStorage.op_Q=''
+		localStorage.op_R=''
+		localStorage.op_S=''
+		localStorage.op_T=''
+		localStorage.op_U=''
+		localStorage.op_V=''
+		localStorage.op_W=''
+		localStorage.op_X=''
+		localStorage.op_Y=''
+		localStorage.op_Z=''
+		localStorage.opProductStr=''
 }
 function check_user() {	
 	var cid=$("#cid").val().toUpperCase();
@@ -1460,6 +1489,8 @@ function check_user() {
 
 	
 	//var  apipath_base_photo_dm='http://127.0.0.1:8000/demo/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+	
+	//var  apipath_base_photo_dm='http://c003.cloudapp.net/demo/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 
 
   var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
@@ -2469,7 +2500,7 @@ function page_pending(){
 						  
 				 });//end ajax
 			if (localStorage.user_type=='sup'){
-				$("#cReqShow").html('<a onClick="repCancelReqShow_sup()" style="font-size:18px; color:#FFF; " >CancelReqPending</a> ');
+				$("#cReqShow").html('<a onClick="repCancelReqShow_sup()" style="font-size:18px; color:#FFF; " >PendingApproved</a> ');
 			}
 			else{
 				$("#cReqShow").html('<a id="blankAnc" name="blankAnc" onClick="homePage()"  ></a> ');
@@ -2675,7 +2706,7 @@ function tourRepInfo(repId){
 									 	var resultArray = data.replace('</START>','').replace('</END>','').split('<SYNCDATA>');	
 										
 										if (resultArray[0]=='FAILED'){
-											$("#err_repInfo").text("Approved route not available");	
+											$("#err_repInfo").text(resultArray[1]);	
 											$("#wait_image_repInfo").hide();		
 											
 										}
@@ -2773,7 +2804,7 @@ function repPendingDoc(rep_id){
 											var days = Math.round(((new Date(year, month))-(new Date(year, month-1)))/86400000);
 											//alert (monthThisShow)
 											//var thisMonthTable='<table width="100%" border="0">  <tr>    <td>'+monthThisShow+'</td><td>&nbsp;</td> <td>&nbsp;</td>    <td align="right">Approved</td>  </tr></table><table style="border-style:solid; border-width:thin; border-color:#096;background-color:#EDFEED" width="100%" border="1" cellspacing="0">'
-											var thisMonthTable='<table width="100%" border="0">  <tr style="font-size:24px; color:#039">    <td >'+monthThisShow+'</td><td>&nbsp;</td> <td>&nbsp;</td>    <td align="right" style="font-size:16px; color:#039">Draft</td>  </tr></table><table style="border-style:solid; border-width:thin; border-color:#096;background-color:#EDFEED" width="100%" border="1" cellspacing="0">'
+											var thisMonthTable='<table width="100%" border="0">  <tr style="font-size:24px; color:#039">    <td >'+monthThisShow+'</td><td>&nbsp;</td> <td>&nbsp;</td>    <td align="right" style="font-size:16px; color:#039">Submitted</td>  </tr></table><table style="border-style:solid; border-width:thin; border-color:#096;background-color:#EDFEED" width="100%" border="1" cellspacing="0">'
 											
 											docTThisMonthRow=localStorage.repDocPending
 											//alert (docTThisMonthRow)
@@ -3453,7 +3484,7 @@ function tourCheckFirst(){
 				
 				
 				
-			nextMonthTable=nextMonthTable+selectCombo+'</br><input type="submit" style="width:30px;" value="OK" onClick="setDiv('+i+')" /><br><br></div></td></tr>'
+			nextMonthTable=nextMonthTable+selectCombo+'</br><input type="submit" style="width:30px;" value=" OK " onClick="setDiv('+i+')" /><br><br></div></td></tr>'
 			
 			
 			
@@ -5546,6 +5577,9 @@ $("#err_marketTour").html('');
 function tourConfirm_doc(){	
 	var pendingRep=localStorage.pendingRep
 	
+	$("#btn_confirm_tour").hide()
+	
+	
 	if (pendingRep==''){
 		$("#err_pendingRouteTour").html('Network Timeout. Please check your Internet connection..');
 	}
@@ -5556,11 +5590,11 @@ function tourConfirm_doc(){
 								type: 'POST',
 								timeout: 30000,
 								error: function(xhr) {
-								$("#wait_image_route_pendingTour").hide();
+								$("#btn_confirm_tour").show()
 								$("#err_pendingRouteTour").html('Network Timeout. Please check your Internet connection..');
 													},
 								success:function(data, status,xhr){	
-									$("#wait_image_route_pendingTour").hide();
+									$("#btn_confirm_tour").show();
 									 if (status!='success'){
 										$("#wait_image_route_pendingTour").hide(); 
 										$("#err_pendingRouteTour").html('Network Timeout. Please check your Internet connection...');
@@ -10847,7 +10881,8 @@ function prescription_submit(){
 	}else{
 		
 		var latitude=$("#lat").val();
-		var longitude=$("#long").val();		
+		var longitude=$("#longitude").val();
+		//alert (longitude)		
 		var picNo = localStorage.picNo
 		var imageDiv="myImage"+picNo
 		var imageText="prPhoto"+picNo
@@ -11046,439 +11081,440 @@ function prcancelSearch() {
 //==============================Opportunity===============
 function setOpProduct(){
 	opProdID_Str=''
-		if (localStorage.pr_A.length != '') {
-			pr_A=localStorage.pr_A
-			var prList_A=pr_A.split('<rd>');
-			var prLength_A=prList_A.length;
-			var pr_tbl_A=''
-			for (j=0; j < prLength_A; j++){
-				var prArray_A = prList_A[j].split('<fd>');
-				var pr_id_A=prArray_A[0];	
-				var pr_name_A=prArray_A[1];
+	//alert (localStorage.op_A)
+		if (localStorage.op_A.length != '') {
+			op_A=localStorage.op_A
+			var opList_A=op_A.split('<rd>');
+			var opLength_A=opList_A.length;
+			var op_tbl_A=''
+			for (j=0; j < opLength_A; j++){
+				var opArray_A = opList_A[j].split('<fd>');
+				var op_id_A=opArray_A[0];	
+				var op_name_A=opArray_A[1];
 				
-				pr_tbl_A=pr_tbl_A+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_A+'\')"  class="name"><font id="opName'+ pr_id_A +'" class="name" >'+ pr_name_A+'</font><input type="hidden" id="doc_op_id'+pr_id_A+'" value="'+pr_id_A+'" > '+'</li>';		
+				op_tbl_A=op_tbl_A+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_A+'\')"  class="name"><font id="opName'+ op_id_A +'" class="name" >'+ op_name_A+'</font><input type="hidden" id="doc_op_id'+op_id_A+'" value="'+op_id_A+'" > '+'</li>';		
 				
 				}
-		localStorage.op_tbl_A=pr_tbl_A		
+		localStorage.op_tbl_A=op_tbl_A		
 		$("#op_id_lv").append(localStorage.op_tbl_A);	
 		
 	}
 	
 	
-	if (localStorage.pr_B.length != '') {
-			pr_B=localStorage.pr_B
-			var prList_B=pr_B.split('<rd>');
-			var prLength_B=prList_B.length;
-			var pr_tbl_B=''
-			for (j=0; j < prLength_B; j++){
-				var prArray_B = prList_B[j].split('<fd>');
-				var pr_id_B=prArray_B[0];	
-				var pr_name_B=prArray_B[1];
+	if (localStorage.op_B.length != '') {
+			op_B=localStorage.op_B
+			var opList_B=op_B.split('<rd>');
+			var opLength_B=opList_B.length;
+			var op_tbl_B=''
+			for (j=0; j < opLength_B; j++){
+				var opArray_B = opList_B[j].split('<fd>');
+				var op_id_B=opArray_B[0];	
+				var op_name_B=opArray_B[1];
 				
-				pr_tbl_B=pr_tbl_B+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_B+'\')"  class="name"><font id="opName'+ pr_id_B +'" class="name" >'+ pr_name_B+'</font><input type="hidden" id="doc_op_id'+pr_id_B+'" value="'+pr_id_B+'" > '+'</li>';		
+				op_tbl_B=op_tbl_B+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_B+'\')"  class="name"><font id="opName'+ op_id_B +'" class="name" >'+ op_name_B+'</font><input type="hidden" id="doc_op_id'+op_id_B+'" value="'+op_id_B+'" > '+'</li>';		
 				
 				}
-		localStorage.op_tbl_B=pr_tbl_B		
+		localStorage.op_tbl_B=op_tbl_B		
 		$("#op_id_lv").append(localStorage.op_tbl_B);	
 	}
 	
 	
-	if (localStorage.pr_C.length != '') {
-			pr_C=localStorage.pr_C
-			var prList_C=pr_C.split('<rd>');
-			var prLength_C=prList_C.length;
-			var pr_tbl_C=''
-			for (j=0; j < prLength_C; j++){
-				var prArray_C = prList_C[j].split('<fd>');
-				var pr_id_C=prArray_C[0];	
-				var pr_name_C=prArray_C[1];
+	if (localStorage.op_C.length != '') {
+			op_C=localStorage.op_C
+			var opList_C=op_C.split('<rd>');
+			var opLength_C=opList_C.length;
+			var op_tbl_C=''
+			for (j=0; j < opLength_C; j++){
+				var opArray_C = opList_C[j].split('<fd>');
+				var op_id_C=opArray_C[0];	
+				var op_name_C=opArray_C[1];
 				
-				pr_tbl_C=pr_tbl_C+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_C+'\')"  class="name"><font id="opName'+ pr_id_C +'" class="name" >'+ pr_name_C+'</font><input type="hidden" id="doc_op_id'+pr_id_C+'" value="'+pr_id_C+'" > '+'</li>';		
-				//var pName=$("#prName"+pr_id_C).html();
+				op_tbl_C=op_tbl_C+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_C+'\')"  class="name"><font id="opName'+ op_id_C +'" class="name" >'+ op_name_C+'</font><input type="hidden" id="doc_op_id'+op_id_C+'" value="'+op_id_C+'" > '+'</li>';		
+				//var pName=$("#opName"+op_id_C).html();
 				
 				}
-		localStorage.op_tbl_C=pr_tbl_C		
+		localStorage.op_tbl_C=op_tbl_C		
 		$("#op_id_lv").append(localStorage.op_tbl_C);	
 	}
 	
 	
-	if (localStorage.pr_D.length != '') {
-			pr_D=localStorage.pr_D
-			var prList_D=pr_D.split('<rd>');
-			var prLength_D=prList_D.length;
-			var pr_tbl_D=''
-			for (j=0; j < prLength_D; j++){
-				var prArray_D = prList_D[j].split('<fd>');
-				var pr_id_D=prArray_D[0];	
-				var pr_name_D=prArray_D[1];
-				pr_tbl_D=pr_tbl_D+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_D+'\')"  class="name"><font id="opName'+ pr_id_D +'" class="name" >'+ pr_name_D+'</font><input type="hidden" id="doc_op_id'+pr_id_D+'" value="'+pr_id_D+'" > '+'</li>';		
-				//prProdID_Str=prProdID_Str+pr_id_D+'<rd>'
+	if (localStorage.op_D.length != '') {
+			op_D=localStorage.op_D
+			var opList_D=op_D.split('<rd>');
+			var opLength_D=opList_D.length;
+			var op_tbl_D=''
+			for (j=0; j < opLength_D; j++){
+				var opArray_D = opList_D[j].split('<fd>');
+				var op_id_D=opArray_D[0];	
+				var op_name_D=opArray_D[1];
+				op_tbl_D=op_tbl_D+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_D+'\')"  class="name"><font id="opName'+ op_id_D +'" class="name" >'+ op_name_D+'</font><input type="hidden" id="doc_op_id'+op_id_D+'" value="'+op_id_D+'" > '+'</li>';		
+				//opProdID_Str=opProdID_Str+op_id_D+'<rd>'
 				}
-		localStorage.op_tbl_D=pr_tbl_D		
+		localStorage.op_tbl_D=op_tbl_D		
 		$("#op_id_lv").append(localStorage.op_tbl_D);	
 	}
 	
 	
-	if (localStorage.pr_E.length != '') {
-			pr_E=localStorage.pr_E
-			var prList_E=pr_E.split('<rd>');
-			var prLength_E=prList_E.length;
-			var pr_tbl_E=''
-			for (j=0; j < prLength_E; j++){
-				var prArray_E = prList_E[j].split('<fd>');
-				var pr_id_E=prArray_E[0];	
-				var pr_name_E=prArray_E[1];
-				pr_tbl_E=pr_tbl_E+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_E+'\')"  class="name"><font id="opName'+ pr_id_E +'" class="name" >'+ pr_name_E+'</font><input type="hidden" id="doc_op_id'+pr_id_E+'" value="'+pr_id_E+'" > '+'</li>';	
-				//prProdID_Str=prProdID_Str+pr_id_E+'<rd>'	
+	if (localStorage.op_E.length != '') {
+			op_E=localStorage.op_E
+			var opList_E=op_E.split('<rd>');
+			var opLength_E=opList_E.length;
+			var op_tbl_E=''
+			for (j=0; j < opLength_E; j++){
+				var opArray_E = opList_E[j].split('<fd>');
+				var op_id_E=opArray_E[0];	
+				var op_name_E=opArray_E[1];
+				op_tbl_E=op_tbl_E+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_E+'\')"  class="name"><font id="opName'+ op_id_E +'" class="name" >'+ op_name_E+'</font><input type="hidden" id="doc_op_id'+op_id_E+'" value="'+op_id_E+'" > '+'</li>';	
+				//opProdID_Str=opProdID_Str+op_id_E+'<rd>'	
 				}
-		localStorage.op_tbl_E=pr_tbl_E		
+		localStorage.op_tbl_E=op_tbl_E		
 		$("#op_id_lv").append(localStorage.op_tbl_E);	
 	}
 	
 	
-		if (localStorage.pr_F.length != '') {
-			pr_F=localStorage.pr_F
-			var prList_F=pr_F.split('<rd>');
-			var prLength_F=prList_F.length;
-			var pr_tbl_F=''
-			for (j=0; j < prLength_F; j++){
-				var prArray_F = prList_F[j].split('<fd>');
-				var pr_id_F=prArray_F[0];	
-				var pr_name_F=prArray_F[1];
-				pr_tbl_F=pr_tbl_F+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_F+'\')"  class="name"><font id="opName'+ pr_id_F +'" class="name" >'+ pr_name_F+'</font><input type="hidden" id="doc_op_id'+pr_id_F+'" value="'+pr_id_F+'" > '+'</li>';		
-				//prProdID_Str=prProdID_Str+pr_id_F+'<rd>'
+		if (localStorage.op_F.length != '') {
+			op_F=localStorage.op_F
+			var opList_F=op_F.split('<rd>');
+			var opLength_F=opList_F.length;
+			var op_tbl_F=''
+			for (j=0; j < opLength_F; j++){
+				var opArray_F = opList_F[j].split('<fd>');
+				var op_id_F=opArray_F[0];	
+				var op_name_F=opArray_F[1];
+				op_tbl_F=op_tbl_F+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_F+'\')"  class="name"><font id="opName'+ op_id_F +'" class="name" >'+ op_name_F+'</font><input type="hidden" id="doc_op_id'+op_id_F+'" value="'+op_id_F+'" > '+'</li>';		
+				//opProdID_Str=opProdID_Str+op_id_F+'<rd>'
 				}
-		localStorage.op_tbl_F=pr_tbl_F		
+		localStorage.op_tbl_F=op_tbl_F		
 		$("#op_id_lv").append(localStorage.op_tbl_F);	
 	}
 	
-	if (localStorage.pr_G.length != '') {
-			pr_G=localStorage.pr_G
-			var prList_G=pr_G.split('<rd>');
-			var prLength_G=prList_G.length;
-			var pr_tbl_G=''
-			for (j=0; j < prLength_G; j++){
-				var prArray_G = prList_G[j].split('<fd>');
-				var pr_id_G=prArray_G[0];	
-				var pr_name_G=prArray_G[1];
-				pr_tbl_G=pr_tbl_G+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_G+'\')"  class="name"><font id="opName'+ pr_id_G +'" class="name" >'+ pr_name_G+'</font><input type="hidden" id="doc_op_id'+pr_id_G+'" value="'+pr_id_G+'" > '+'</li>';		
-				//prProdID_Str=prProdID_Str+pr_id_G+'<rd>'
+	if (localStorage.op_G.length != '') {
+			op_G=localStorage.op_G
+			var opList_G=op_G.split('<rd>');
+			var opLength_G=opList_G.length;
+			var op_tbl_G=''
+			for (j=0; j < opLength_G; j++){
+				var opArray_G = opList_G[j].split('<fd>');
+				var op_id_G=opArray_G[0];	
+				var op_name_G=opArray_G[1];
+				op_tbl_G=op_tbl_G+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_G+'\')"  class="name"><font id="opName'+ op_id_G +'" class="name" >'+ op_name_G+'</font><input type="hidden" id="doc_op_id'+op_id_G+'" value="'+op_id_G+'" > '+'</li>';		
+				//opProdID_Str=opProdID_Str+op_id_G+'<rd>'
 				}
-		localStorage.op_tbl_G=pr_tbl_G		
+		localStorage.op_tbl_G=op_tbl_G		
 		$("#op_id_lv").append(localStorage.op_tbl_G);	
 	}
 	
 	
-	if (localStorage.pr_H.length != '') {
-			pr_H=localStorage.pr_H
-			var prList_H=pr_H.split('<rd>');
-			var prLength_H=prList_H.length;
-			var pr_tbl_H=''
-			for (j=0; j < prLength_H; j++){
-				var prArray_H = prList_H[j].split('<fd>');
-				var pr_id_H=prArray_H[0];	
-				var pr_name_H=prArray_H[1];
-				pr_tbl_H=pr_tbl_H+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_H+'\')"  class="name"><font id="opName'+ pr_id_H +'" class="name" >'+ pr_name_H+'</font><input type="hidden" id="doc_op_id'+pr_id_H+'" value="'+pr_id_H+'" > '+'</li>';		
-				//prProdID_Str=prProdID_Str+pr_id_H+'<rd>'
+	if (localStorage.op_H.length != '') {
+			op_H=localStorage.op_H
+			var opList_H=op_H.split('<rd>');
+			var opLength_H=opList_H.length;
+			var op_tbl_H=''
+			for (j=0; j < opLength_H; j++){
+				var opArray_H = opList_H[j].split('<fd>');
+				var op_id_H=opArray_H[0];	
+				var op_name_H=opArray_H[1];
+				op_tbl_H=op_tbl_H+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_H+'\')"  class="name"><font id="opName'+ op_id_H +'" class="name" >'+ op_name_H+'</font><input type="hidden" id="doc_op_id'+op_id_H+'" value="'+op_id_H+'" > '+'</li>';		
+				//opProdID_Str=opProdID_Str+op_id_H+'<rd>'
 				}
-		localStorage.pr_tbl_H=pr_tbl_H		
-		$("#op_id_lv").append(localStorage.pr_tbl_H);	
+		localStorage.op_tbl_H=op_tbl_H		
+		$("#op_id_lv").append(localStorage.op_tbl_H);	
 	}
 	
 	
 	
-	if (localStorage.pr_I.length != '') {
-			pr_I=localStorage.pr_I
-			var prList_I=pr_I.split('<rd>');
-			var prLength_I=prList_I.length;
-			var pr_tbl_I=''
-			for (j=0; j < prLength_I; j++){
-				var prArray_I = prList_I[j].split('<fd>');
-				var pr_id_I=prArray_I[0];	
-				var pr_name_I=prArray_I[1];
-				pr_tbl_I=pr_tbl_I+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_I+'\')"  class="name"><font id="opName'+ pr_id_I +'" class="name" >'+ pr_name_I+'</font><input type="hidden" id="doc_op_id'+pr_id_I+'" value="'+pr_id_I+'" > '+'</li>';	
-				//prProdID_Str=prProdID_Str+pr_id_I+'<rd>'	
+	if (localStorage.op_I.length != '') {
+			op_I=localStorage.op_I
+			var opList_I=op_I.split('<rd>');
+			var opLength_I=opList_I.length;
+			var op_tbl_I=''
+			for (j=0; j < opLength_I; j++){
+				var opArray_I = opList_I[j].split('<fd>');
+				var op_id_I=opArray_I[0];	
+				var op_name_I=opArray_I[1];
+				op_tbl_I=op_tbl_I+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_I+'\')"  class="name"><font id="opName'+ op_id_I +'" class="name" >'+ op_name_I+'</font><input type="hidden" id="doc_op_id'+op_id_I+'" value="'+op_id_I+'" > '+'</li>';	
+				//opProdID_Str=opProdID_Str+op_id_I+'<rd>'	
 				}
-		localStorage.op_tbl_I=pr_tbl_I		
+		localStorage.op_tbl_I=op_tbl_I		
 		$("#op_id_lv").append(localStorage.op_tbl_I);	
 	}
 	
 	
-	if (localStorage.pr_J.length != '') {
-			pr_J=localStorage.pr_J
-			var prList_J=pr_J.split('<rd>');
-			var prLength_J=prList_J.length;
-			var pr_tbl_J=''
-			for (j=0; j < prLength_j; j++){
-				var prArray_J = prList_J[j].split('<fd>');
-				var pr_id_J=prArray_J[0];	
-				var pr_name_J=prArray_J[1];
-				pr_tbl_J=pr_tbl_J+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_J+'\')"  class="name"><font id="opName'+ pr_id_J +'" class="name" >'+ pr_name_J+'</font><input type="hidden" id="doc_op_id'+pr_id_J+'" value="'+pr_id_J+'" > '+'</li>';	
-				//prProdID_Str=prProdID_Str+pr_id_J+'<rd>'	
+	if (localStorage.op_J.length != '') {
+			op_J=localStorage.op_J
+			var opList_J=op_J.split('<rd>');
+			var opLength_J=opList_J.length;
+			var op_tbl_J=''
+			for (j=0; j < opLength_j; j++){
+				var opArray_J = opList_J[j].split('<fd>');
+				var op_id_J=opArray_J[0];	
+				var op_name_J=opArray_J[1];
+				op_tbl_J=op_tbl_J+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_J+'\')"  class="name"><font id="opName'+ op_id_J +'" class="name" >'+ op_name_J+'</font><input type="hidden" id="doc_op_id'+op_id_J+'" value="'+op_id_J+'" > '+'</li>';	
+				//opProdID_Str=opProdID_Str+op_id_J+'<rd>'	
 				}
-		localStorage.op_tbl_J=pr_tbl_J		
+		localStorage.op_tbl_J=op_tbl_J		
 		$("#op_id_lv").append(localStorage.op_tbl_J);	
 	}
 	
 	
-	if (localStorage.pr_K.length != '') {
-			pr_K=localStorage.pr_K
-			var prList_K=pr_K.split('<rd>');
-			var prLength_K=prList_K.length;
-			var pr_tbl_K=''
-			for (j=0; j < prLength_K; j++){
-				var prArray_K = prList_K[j].split('<fd>');
-				var pr_id_K=prArray_K[0];	
-				var pr_name_K=prArray_K[1];
-				pr_tbl_K=pr_tbl_K+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_K+'\')"  class="name"><font id="opName'+ pr_id_K +'" class="name" >'+ pr_name_K+'</font><input type="hidden" id="doc_op_id'+pr_id_K+'" value="'+pr_id_K+'" > '+'</li>';	
-				//prProdID_Str=prProdID_Str+pr_id_K+'<rd>'	
+	if (localStorage.op_K.length != '') {
+			op_K=localStorage.op_K
+			var opList_K=op_K.split('<rd>');
+			var opLength_K=opList_K.length;
+			var op_tbl_K=''
+			for (j=0; j < opLength_K; j++){
+				var opArray_K = opList_K[j].split('<fd>');
+				var op_id_K=opArray_K[0];	
+				var op_name_K=opArray_K[1];
+				op_tbl_K=op_tbl_K+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_K+'\')"  class="name"><font id="opName'+ op_id_K +'" class="name" >'+ op_name_K+'</font><input type="hidden" id="doc_op_id'+op_id_K+'" value="'+op_id_K+'" > '+'</li>';	
+				//opProdID_Str=opProdID_Str+op_id_K+'<rd>'	
 				}
-		localStorage.op_tbl_K=pr_tbl_K		
+		localStorage.op_tbl_K=op_tbl_K		
 		$("#op_id_lv").append(localStorage.op_tbl_K);	
 	}
 	
 	
-	if (localStorage.pr_L.length != '') {
-			pr_L=localStorage.pr_L
-			var prList_L=pr_L.split('<rd>');
-			var prLength_L=prList_L.length;
-			var pr_tbl_L=''
-			for (j=0; j < prLength_L; j++){
-				var prArray_L = prList_L[j].split('<fd>');
-				var pr_id_L=prArray_L[0];	
-				var pr_name_L=prArray_L[1];
-				pr_tbl_L=pr_tbl_L+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_L+'\')"  class="name"><font id="opName'+ pr_id_L +'" class="name" >'+ pr_name_L+'</font><input type="hidden" id="doc_op_id'+pr_id_L+'" value="'+pr_id_L+'" > '+'</li>';	
-				//prProdID_Str=prProdID_Str+pr_id_L+'<rd>'	
+	if (localStorage.op_L.length != '') {
+			op_L=localStorage.op_L
+			var opList_L=op_L.split('<rd>');
+			var opLength_L=opList_L.length;
+			var op_tbl_L=''
+			for (j=0; j < opLength_L; j++){
+				var opArray_L = opList_L[j].split('<fd>');
+				var op_id_L=opArray_L[0];	
+				var op_name_L=opArray_L[1];
+				op_tbl_L=op_tbl_L+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_L+'\')"  class="name"><font id="opName'+ op_id_L +'" class="name" >'+ op_name_L+'</font><input type="hidden" id="doc_op_id'+op_id_L+'" value="'+op_id_L+'" > '+'</li>';	
+				//opProdID_Str=opProdID_Str+op_id_L+'<rd>'	
 				}
-		localStorage.op_tbl_L=pr_tbl_L	
+		localStorage.op_tbl_L=op_tbl_L	
 		$("#op_id_lv").append(localStorage.op_tbl_L);	
 	}
 	
-	if (localStorage.pr_M.length != '') {
-			pr_M=localStorage.pr_M
-			var prList_M=pr_M.split('<rd>');
-			var prLength_M=prList_M.length;
-			var pr_tbl_M=''
-			for (j=0; j < prLength_M; j++){
-				var prArray_M = prList_M[j].split('<fd>');
-				var pr_id_M=prArray_M[0];	
-				var pr_name_M=prArray_M[1];
-				pr_tbl_M=pr_tbl_M+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_M+'\')"  class="name"><font id="opName'+ pr_id_M +'" class="name" >'+ pr_name_M+'</font><input type="hidden" id="doc_op_id'+pr_id_M+'" value="'+pr_id_M+'" > '+'</li>';		
-				prProdID_Str=prProdID_Str+pr_id_M+'<rd>'
+	if (localStorage.op_M.length != '') {
+			op_M=localStorage.op_M
+			var opList_M=op_M.split('<rd>');
+			var opLength_M=opList_M.length;
+			var op_tbl_M=''
+			for (j=0; j < opLength_M; j++){
+				var opArray_M = opList_M[j].split('<fd>');
+				var op_id_M=opArray_M[0];	
+				var op_name_M=opArray_M[1];
+				op_tbl_M=op_tbl_M+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_M+'\')"  class="name"><font id="opName'+ op_id_M +'" class="name" >'+ op_name_M+'</font><input type="hidden" id="doc_op_id'+op_id_M+'" value="'+op_id_M+'" > '+'</li>';		
+				opProdID_Str=opProdID_Str+op_id_M+'<rd>'
 				}
-		localStorage.op_tbl_M=pr_tbl_M	
+		localStorage.op_tbl_M=op_tbl_M	
 		$("#op_id_lv").append(localStorage.op_tbl_M);	
 	}
 	
 	
-	if (localStorage.pr_N.length != '') {
-			pr_N=localStorage.pr_N
-			var prList_N=pr_N.split('<rd>');
-			var prLength_N=prList_N.length;
-			var pr_tbl_N=''
-			for (j=0; j < prLength_N; j++){
-				var prArray_N = prList_N[j].split('<fd>');
-				var pr_id_N=prArray_N[0];	
-				var pr_name_N=prArray_N[1];
-				pr_tbl_N=pr_tbl_N+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_N+'\')"  class="name"><font id="opName'+ pr_id_N +'" class="name" >'+ pr_name_N+'</font><input type="hidden" id="doc_op_id'+pr_id_N+'" value="'+pr_id_N+'" > '+'</li>';	
-				//prProdID_Str=prProdID_Str+pr_id_N+'<rd>'	
+	if (localStorage.op_N.length != '') {
+			op_N=localStorage.op_N
+			var opList_N=op_N.split('<rd>');
+			var opLength_N=opList_N.length;
+			var op_tbl_N=''
+			for (j=0; j < opLength_N; j++){
+				var opArray_N = opList_N[j].split('<fd>');
+				var op_id_N=opArray_N[0];	
+				var op_name_N=opArray_N[1];
+				op_tbl_N=op_tbl_N+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_N+'\')"  class="name"><font id="opName'+ op_id_N +'" class="name" >'+ op_name_N+'</font><input type="hidden" id="doc_op_id'+op_id_N+'" value="'+op_id_N+'" > '+'</li>';	
+				//opProdID_Str=opProdID_Str+op_id_N+'<rd>'	
 				}
-		localStorage.op_tbl_N=pr_tbl_N	
+		localStorage.op_tbl_N=op_tbl_N	
 		$("#op_id_lv").append(localStorage.op_tbl_N);	
 	}
 	
-	if (localStorage.pr_O.length != '') {
-			pr_O=localStorage.pr_O
-			var prList_O=pr_O.split('<rd>');
-			var prLength_O=prList_O.length;
-			var pr_tbl_O=''
-			for (j=0; j < prLength_O; j++){
-				var prArray_O = prList_O[j].split('<fd>');
-				var pr_id_O=prArray_O[0];	
-				var pr_name_O=prArray_O[1];
-				pr_tbl_O=pr_tbl_O+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_O+'\')"  class="name"><font id="opName'+ pr_id_O +'" class="name" >'+ pr_name_O+'</font><input type="hidden" id="doc_op_id'+pr_id_O+'" value="'+pr_id_O+'" > '+'</li>';		
-				//prProdID_Str=prProdID_Str+pr_id_O+'<rd>'
+	if (localStorage.op_O.length != '') {
+			op_O=localStorage.op_O
+			var opList_O=op_O.split('<rd>');
+			var opLength_O=opList_O.length;
+			var op_tbl_O=''
+			for (j=0; j < opLength_O; j++){
+				var opArray_O = opList_O[j].split('<fd>');
+				var op_id_O=opArray_O[0];	
+				var op_name_O=opArray_O[1];
+				op_tbl_O=op_tbl_O+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_O+'\')"  class="name"><font id="opName'+ op_id_O +'" class="name" >'+ op_name_O+'</font><input type="hidden" id="doc_op_id'+op_id_O+'" value="'+op_id_O+'" > '+'</li>';		
+				//opProdID_Str=opProdID_Str+op_id_O+'<rd>'
 				}
-		localStorage.op_tbl_O=pr_tbl_O
+		localStorage.op_tbl_O=op_tbl_O
 		$("#op_id_lv").append(localStorage.op_tbl_O);	
 	}
 	
-	if (localStorage.pr_P.length != '') {
-			pr_P=localStorage.pr_P
-			var prList_P=pr_P.split('<rd>');
-			var prLength_P=prList_P.length;
-			var pr_tbl_P=''
-			for (j=0; j < prLength_P; j++){
-				var prArray_P = prList_P[j].split('<fd>');
+	if (localStorage.op_P.length != '') {
+			op_P=localStorage.op_P
+			var opList_P=op_P.split('<rd>');
+			var opLength_P=opList_P.length;
+			var op_tbl_P=''
+			for (j=0; j < opLength_P; j++){
+				var opArray_P = opList_P[j].split('<fd>');
 
-				var pr_id_P=prArray_P[0];	
-				var pr_name_P=prArray_P[1];
-				pr_tbl_P=pr_tbl_P+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_P+'\')"  class="name"><font id="opName'+ pr_id_P +'" class="name" >'+ pr_name_P+'</font><input type="hidden" id="doc_op_id'+pr_id_P+'" value="'+pr_id_P+'" > '+'</li>';	
-				//prProdID_Str=prProdID_Str+pr_id_P+'<rd>'	
+				var op_id_P=opArray_P[0];	
+				var op_name_P=opArray_P[1];
+				op_tbl_P=op_tbl_P+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_P+'\')"  class="name"><font id="opName'+ op_id_P +'" class="name" >'+ op_name_P+'</font><input type="hidden" id="doc_op_id'+op_id_P+'" value="'+op_id_P+'" > '+'</li>';	
+				//opProdID_Str=opProdID_Str+op_id_P+'<rd>'	
 				}
-		localStorage.op_tbl_P=pr_tbl_P
+		localStorage.op_tbl_P=op_tbl_P
 		$("#op_id_lv").append(localStorage.op_tbl_P);	
 	}
 	
-	if (localStorage.pr_Q.length != '') {
-			pr_Q=localStorage.pr_Q
-			var prList_Q=pr_Q.split('<rd>');
-			var prLength_Q=prList_Q.length;
-			var pr_tbl_Q=''
-			for (j=0; j < prLength_Q; j++){
-				var prArray_Q = prList_Q[j].split('<fd>');
-				var pr_id_Q=prArray_Q[0];	
-				var pr_name_Q=prArray_Q[1];
-				pr_tbl_Q=pr_tbl_Q+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_Q+'\')"  class="name"><font id="opName'+ pr_id_Q +'" class="name" >'+ pr_name_Q+'</font><input type="hidden" id="doc_op_id'+pr_id_Q+'" value="'+pr_id_Q+'" > '+'</li>';	
-				//prProdID_Str=prProdID_Str+pr_id_Q+'<rd>'	
+	if (localStorage.op_Q.length != '') {
+			op_Q=localStorage.op_Q
+			var opList_Q=op_Q.split('<rd>');
+			var opLength_Q=opList_Q.length;
+			var op_tbl_Q=''
+			for (j=0; j < opLength_Q; j++){
+				var opArray_Q = opList_Q[j].split('<fd>');
+				var op_id_Q=opArray_Q[0];	
+				var op_name_Q=opArray_Q[1];
+				op_tbl_Q=op_tbl_Q+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_Q+'\')"  class="name"><font id="opName'+ op_id_Q +'" class="name" >'+ op_name_Q+'</font><input type="hidden" id="doc_op_id'+op_id_Q+'" value="'+op_id_Q+'" > '+'</li>';	
+				//opProdID_Str=opProdID_Str+op_id_Q+'<rd>'	
 				}
-		localStorage.op_tbl_Q=pr_tbl_Q
+		localStorage.op_tbl_Q=op_tbl_Q
 		$("#op_id_lv").append(localStorage.op_tbl_Q);	
 	}
 	
-	if (localStorage.pr_R.length != '') {
-			pr_R=localStorage.pr_R
-			var prList_R=pr_R.split('<rd>');
-			var prLength_R=prList_R.length;
-			var pr_tbl_R=''
-			for (j=0; j < prLength_R; j++){
-				var prArray_R = prList_R[j].split('<fd>');
-				var pr_id_R=prArray_R[0];	
-				var pr_name_R=prArray_R[1];
-				pr_tbl_R=pr_tbl_R+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_R+'\')"  class="name"><font id="opName'+ pr_id_R +'" class="name" >'+ pr_name_R+'</font><input type="hidden" id="doc_op_id'+pr_id_R+'" value="'+pr_id_R+'" > '+'</li>';		
-				//prProdID_Str=prProdID_Str+pr_id_R+'<rd>'
+	if (localStorage.op_R.length != '') {
+			op_R=localStorage.op_R
+			var opList_R=op_R.split('<rd>');
+			var opLength_R=opList_R.length;
+			var op_tbl_R=''
+			for (j=0; j < opLength_R; j++){
+				var opArray_R = opList_R[j].split('<fd>');
+				var op_id_R=opArray_R[0];	
+				var op_name_R=opArray_R[1];
+				op_tbl_R=op_tbl_R+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_R+'\')"  class="name"><font id="opName'+ op_id_R +'" class="name" >'+ op_name_R+'</font><input type="hidden" id="doc_op_id'+op_id_R+'" value="'+op_id_R+'" > '+'</li>';		
+				//opProdID_Str=opProdID_Str+op_id_R+'<rd>'
 				}
-		localStorage.op_tbl_R=pr_tbl_R
+		localStorage.op_tbl_R=op_tbl_R
 		$("#op_id_lv").append(localStorage.op_tbl_R);	
 	}
 	
-	if (localStorage.pr_S.length != '') {
-			pr_S=localStorage.pr_S
-			var prList_S=pr_S.split('<rd>');
-			var prLength_S=prList_S.length;
-			var pr_tbl_S=''
-			for (j=0; j < prLength_S; j++){
-				var prArray_S = prList_S[j].split('<fd>');
-				var pr_id_S=prArray_S[0];	
-				var pr_name_S=prArray_S[1];
-				pr_tbl_S=pr_tbl_S+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_S+'\')"  class="name"><font id="opName'+ pr_id_S +'" class="name" >'+ pr_name_S+'</font><input type="hidden" id="doc_op_id'+pr_id_S+'" value="'+pr_id_S+'" > '+'</li>';	
-				//prProdID_Str=prProdID_Str+pr_id_S+'<rd>'	
+	if (localStorage.op_S.length != '') {
+			op_S=localStorage.op_S
+			var opList_S=op_S.split('<rd>');
+			var opLength_S=opList_S.length;
+			var op_tbl_S=''
+			for (j=0; j < opLength_S; j++){
+				var opArray_S = opList_S[j].split('<fd>');
+				var op_id_S=opArray_S[0];	
+				var op_name_S=opArray_S[1];
+				op_tbl_S=op_tbl_S+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_S+'\')"  class="name"><font id="opName'+ op_id_S +'" class="name" >'+ op_name_S+'</font><input type="hidden" id="doc_op_id'+op_id_S+'" value="'+op_id_S+'" > '+'</li>';	
+				//opProdID_Str=opProdID_Str+op_id_S+'<rd>'	
 				}
-		localStorage.op_tbl_S=pr_tbl_S
+		localStorage.op_tbl_S=op_tbl_S
 		$("#op_id_lv").append(localStorage.op_tbl_S);	
 	}
 	
-	if (localStorage.pr_T.length != '') {
-			pr_T=localStorage.pr_T
-			var prList_T=pr_T.split('<rd>');
-			var prLength_T=prList_T.length;
-			var pr_tbl_T=''
-			for (j=0; j < prLength_T; j++){
-				var prArray_T = prList_T[j].split('<fd>');
-				var pr_id_T=prArray_T[0];	
-				var pr_name_T=prArray_T[1];
-				pr_tbl_T=pr_tbl_T+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_T+'\')"  class="name"><font id="opName'+ pr_id_T +'" class="name" >'+ pr_name_T+'</font><input type="hidden" id="doc_op_id'+pr_id_T+'" value="'+pr_id_T+'" > '+'</li>';		
-				//prProdID_Str=prProdID_Str+pr_id_T+'<rd>'
+	if (localStorage.op_T.length != '') {
+			op_T=localStorage.op_T
+			var opList_T=op_T.split('<rd>');
+			var opLength_T=opList_T.length;
+			var op_tbl_T=''
+			for (j=0; j < opLength_T; j++){
+				var opArray_T = opList_T[j].split('<fd>');
+				var op_id_T=opArray_T[0];	
+				var op_name_T=opArray_T[1];
+				op_tbl_T=op_tbl_T+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_T+'\')"  class="name"><font id="opName'+ op_id_T +'" class="name" >'+ op_name_T+'</font><input type="hidden" id="doc_op_id'+op_id_T+'" value="'+op_id_T+'" > '+'</li>';		
+				//opProdID_Str=opProdID_Str+op_id_T+'<rd>'
 				}
-		localStorage.op_tbl_T=pr_tbl_T
+		localStorage.op_tbl_T=op_tbl_T
 		$("#op_id_lv").append(localStorage.op_tbl_T);	
 	}
 	
-	if (localStorage.pr_U.length != '') {
-			pr_U=localStorage.pr_U
-			var prList_U=pr_U.split('<rd>');
-			var prLength_U=prList_U.length;
-			var pr_tbl_U=''
-			for (j=0; j < prLength_U; j++){
-				var prArray_U = prList_U[j].split('<fd>');
-				var pr_id_U=prArray_U[0];	
-				var pr_name_U=prArray_U[1];
-				pr_tbl_U=pr_tbl_U+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_U+'\')"  class="name"><font id="opName'+ pr_id_U +'" class="name" >'+ pr_name_U+'</font><input type="hidden" id="doc_op_id'+pr_id_U+'" value="'+pr_id_U+'" > '+'</li>';	
-				//prProdID_Str=prProdID_Str+pr_id_U+'<rd>'	
+	if (localStorage.op_U.length != '') {
+			op_U=localStorage.op_U
+			var opList_U=op_U.split('<rd>');
+			var opLength_U=opList_U.length;
+			var op_tbl_U=''
+			for (j=0; j < opLength_U; j++){
+				var opArray_U = opList_U[j].split('<fd>');
+				var op_id_U=opArray_U[0];	
+				var op_name_U=opArray_U[1];
+				op_tbl_U=op_tbl_U+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_U+'\')"  class="name"><font id="opName'+ op_id_U +'" class="name" >'+ op_name_U+'</font><input type="hidden" id="doc_op_id'+op_id_U+'" value="'+op_id_U+'" > '+'</li>';	
+				//opProdID_Str=opProdID_Str+op_id_U+'<rd>'	
 				}
-		localStorage.op_tbl_U=pr_tbl_U
+		localStorage.op_tbl_U=op_tbl_U
 		$("#op_id_lv").append(localStorage.op_tbl_U);	
 	}
 	
-	if (localStorage.pr_V.length != '') {
-			pr_V=localStorage.pr_V
-			var prList_V=pr_V.split('<rd>');
-			var prLength_V=prList_V.length;
-			var pr_tbl_V=''
-			for (j=0; j < prLength_V; j++){
-				var prArray_V = prList_V[j].split('<fd>');
-				var pr_id_V=prArray_V[0];	
-				var pr_name_V=prArray_V[1];
-				pr_tbl_V=pr_tbl_V+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_V+'\')"  class="name"><font id="opName'+ pr_id_V +'" class="name" >'+ pr_name_V+'</font><input type="hidden" id="doc_op_id'+pr_id_V+'" value="'+pr_id_V+'" > '+'</li>';	
-				//prProdID_Str=prProdID_Str+pr_id_V+'<rd>'	
+	if (localStorage.op_V.length != '') {
+			op_V=localStorage.op_V
+			var opList_V=op_V.split('<rd>');
+			var opLength_V=opList_V.length;
+			var op_tbl_V=''
+			for (j=0; j < opLength_V; j++){
+				var opArray_V = opList_V[j].split('<fd>');
+				var op_id_V=opArray_V[0];	
+				var op_name_V=opArray_V[1];
+				op_tbl_V=op_tbl_V+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_V+'\')"  class="name"><font id="opName'+ op_id_V +'" class="name" >'+ op_name_V+'</font><input type="hidden" id="doc_op_id'+op_id_V+'" value="'+op_id_V+'" > '+'</li>';	
+				//opProdID_Str=opProdID_Str+op_id_V+'<rd>'	
 				}
-		localStorage.op_tbl_V=pr_tbl_V
+		localStorage.op_tbl_V=op_tbl_V
 		$("#op_id_lv").append(localStorage.op_tbl_V);	
 	}
 	
-	if (localStorage.pr_W.length != '') {
-			pr_W=localStorage.pr_W
-			var prList_W=pr_W.split('<rd>');
-			var prLength_W=prList_W.length;
-			var pr_tbl_W=''
-			for (j=0; j < prLength_W; j++){
-				var prArray_W = prList_W[j].split('<fd>');
-				var pr_id_W=prArray_W[0];	
-				var pr_name_W=prArray_W[1];
-				pr_tbl_W=pr_tbl_W+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_W+'\')"  class="name"><font id="opName'+ pr_id_W +'" class="name" >'+ pr_name_W+'</font><input type="hidden" id="doc_op_id'+pr_id_W+'" value="'+pr_id_W+'" > '+'</li>';	
-				prProdID_Str=prProdID_Str+pr_id_W+'<rd>'	
+	if (localStorage.op_W.length != '') {
+			op_W=localStorage.op_W
+			var opList_W=op_W.split('<rd>');
+			var opLength_W=opList_W.length;
+			var op_tbl_W=''
+			for (j=0; j < opLength_W; j++){
+				var opArray_W = opList_W[j].split('<fd>');
+				var op_id_W=opArray_W[0];	
+				var op_name_W=opArray_W[1];
+				op_tbl_W=op_tbl_W+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_W+'\')"  class="name"><font id="opName'+ op_id_W +'" class="name" >'+ op_name_W+'</font><input type="hidden" id="doc_op_id'+op_id_W+'" value="'+op_id_W+'" > '+'</li>';	
+				opProdID_Str=opProdID_Str+op_id_W+'<rd>'	
 				}
-		localStorage.op_tbl_W=pr_tbl_W
+		localStorage.op_tbl_W=op_tbl_W
 		$("#op_id_lv").append(localStorage.op_tbl_W);	
 	}
 
 	
-	if (localStorage.pr_X.length != '') {
-			pr_X=localStorage.pr_X
-			var prList_X=pr_X.split('<rd>');
-			var prLength_X=prList_X.length;
-			var pr_tbl_X=''
-			for (j=0; j < prLength_X; j++){
-				var prArray_X = prList_X[j].split('<fd>');
-				var pr_id_X=prArray_X[0];	
-				var pr_name_X=prArray_X[1];
-				pr_tbl_X=pr_tbl_X+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_X+'\')"  class="name"><font id="opName'+ pr_id_X +'" class="name" >'+ pr_name_X+'</font><input type="hidden" id="doc_op_id'+pr_id_X+'" value="'+pr_id_X+'" > '+'</li>';	
-				//prProdID_Str=prProdID_Str+pr_id_X+'<rd>'	
+	if (localStorage.op_X.length != '') {
+			op_X=localStorage.op_X
+			var opList_X=op_X.split('<rd>');
+			var opLength_X=opList_X.length;
+			var op_tbl_X=''
+			for (j=0; j < opLength_X; j++){
+				var opArray_X = opList_X[j].split('<fd>');
+				var op_id_X=opArray_X[0];	
+				var op_name_X=opArray_X[1];
+				op_tbl_X=op_tbl_X+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_X+'\')"  class="name"><font id="opName'+ op_id_X +'" class="name" >'+ op_name_X+'</font><input type="hidden" id="doc_op_id'+op_id_X+'" value="'+op_id_X+'" > '+'</li>';	
+				//opProdID_Str=opProdID_Str+op_id_X+'<rd>'	
 				}
-		localStorage.pr_tbl_X=pr_tbl_X
+		localStorage.op_tbl_X=op_tbl_X
 		$("#op_id_lv").append(localStorage.op_tbl_Y);	
 	}
 
 	
-	if (localStorage.pr_Y.length != '') {
-			pr_Y=localStorage.pr_Y
-			var prList_Y=pr_Y.split('<rd>');
-			var prLength_Y=prList_Y.length;
-			var pr_tbl_Y=''
-			for (j=0; j < prLength_Y; j++){
-				var prArray_Y = prList_Y[j].split('<fd>');
-				var pr_id_Y=prArray_Y[0];	
-				var pr_name_Y=prArray_Y[1];
-				pr_tbl_Y=pr_tbl_Y+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_Y+'\')"  class="name"><font id="opName'+ pr_id_Y +'" class="name" >'+ pr_name_Y+'</font><input type="hidden" id="doc_op_id'+pr_id_Y+'" value="'+pr_id_Y+'" > '+'</li>';	
-				//prProdID_Str=prProdID_Str+pr_id_Y+'<rd>'	
+	if (localStorage.op_Y.length != '') {
+			op_Y=localStorage.op_Y
+			var opList_Y=op_Y.split('<rd>');
+			var opLength_Y=opList_Y.length;
+			var op_tbl_Y=''
+			for (j=0; j < opLength_Y; j++){
+				var opArray_Y = opList_Y[j].split('<fd>');
+				var op_id_Y=opArray_Y[0];	
+				var op_name_Y=opArray_Y[1];
+				op_tbl_Y=op_tbl_Y+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_Y+'\')"  class="name"><font id="opName'+ op_id_Y +'" class="name" >'+ op_name_Y+'</font><input type="hidden" id="doc_op_id'+op_id_Y+'" value="'+op_id_Y+'" > '+'</li>';	
+				//opProdID_Str=opProdID_Str+op_id_Y+'<rd>'	
 				}
-		localStorage.op_tbl_Y=pr_tbl_Y
+		localStorage.op_tbl_Y=op_tbl_Y
 		$("#op_id_lv").append(localStorage.op_tbl_Y);	
 	}
 	
-	if (localStorage.pr_Z.length != '') {
-			pr_Z=localStorage.pr_Z
-			var prList_Z=pr_Z.split('<rd>');
-			var prLength_Z=prList_Z.length;
-			var pr_tbl_Z=''
-			for (j=0; j < prLength_Z; j++){
-				var prArray_Z = prList_Z[j].split('<fd>');
-				var pr_id_Z=prArray_Z[0];	
-				var pr_name_Z=prArray_Z[1];
-				pr_tbl_Z=pr_tbl_Z+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+pr_id_Z+'\')"  class="name"><font id="opName'+ pr_id_Z +'" class="name" >'+ pr_name_Z+'</font><input type="hidden" id="doc_op_id'+pr_id_Z+'" value="'+pr_id_Z+'" > '+'</li>';	
-				//prProdID_Str=prProdID_Str+pr_id_Z+'<rd>'	
+	if (localStorage.op_Z.length != '') {
+			op_Z=localStorage.op_Z
+			var opList_Z=op_Z.split('<rd>');
+			var opLength_Z=opList_Z.length;
+			var op_tbl_Z=''
+			for (j=0; j < opLength_Z; j++){
+				var opArray_Z = opList_Z[j].split('<fd>');
+				var op_id_Z=opArray_Z[0];	
+				var op_name_Z=opArray_Z[1];
+				op_tbl_Z=op_tbl_Z+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin "  onClick="check_boxTrue_op(\''+op_id_Z+'\')"  class="name"><font id="opName'+ op_id_Z +'" class="name" >'+ op_name_Z+'</font><input type="hidden" id="doc_op_id'+op_id_Z+'" value="'+op_id_Z+'" > '+'</li>';	
+				//opProdID_Str=opProdID_Str+op_id_Z+'<rd>'	
 				}
-		localStorage.op_tbl_Z=pr_tbl_Z
+		localStorage.op_tbl_Z=op_tbl_Z
 		$("#op_id_lv").append(localStorage.op_tbl_Z);	
 	}
 	//localStorage.prProdID_Str=prProdID_Str;
@@ -11696,6 +11732,115 @@ $.ajax(localStorage.base_url+'doctor_sync?cid='+localStorage.cid+'&rep_id='+loca
 											$("#doctorButton").show();		
 											$("#loginButton").show();							
 											localStorage.market_doctorVisit=resultArray[1];
+											localStorage.opProductStr=resultArray[2];
+											//alert (localStorage.opProductStr)
+											var op_A=localStorage.opProductStr.split('<AEND>')[0].replace('<ASTART>','');
+											var op_after_A=localStorage.opProductStr.split('<AEND>')[1]
+											//alert (op_A)
+											var op_B=op_after_A.split('<BEND>')[0].replace('<BSTART>','');
+											var op_after_B=op_after_A.split('<BEND>')[1]
+											//alert (op_B)
+											var op_C=op_after_B.split('<CEND>')[0].replace('<CSTART>','');
+											var op_after_C=op_after_B.split('<CEND>')[1]
+											//alert (op_C)
+											var op_D=op_after_C.split('<DEND>')[0].replace('<DSTART>','');
+											var op_after_D=op_after_C.split('<DEND>')[1]
+											//alert (op_D)
+											var op_E=op_after_D.split('<EEND>')[0].replace('<ESTART>','');
+											var op_after_E=op_after_D.split('<EEND>')[1]
+											//alert (op_E)
+											var op_F=op_after_E.split('<FEND>')[0].replace('<FSTART>','');
+											var op_after_F=op_after_E.split('<FEND>')[1]
+											//alert (op_F)
+											var op_G=op_after_F.split('<GEND>')[0].replace('<GSTART>','');
+											var op_after_G=op_after_F.split('<GEND>')[1]
+											//alert (op_G)
+											var op_H=op_after_G.split('<HEND>')[0].replace('<HSTART>','');
+											var op_after_H=op_after_G.split('<HEND>')[1]
+											//alert (op_H)
+											var op_I=op_after_H.split('<IEND>')[0].replace('<ISTART>','');
+											var op_after_I=op_after_H.split('<IEND>')[1]
+											//alert (op_I)
+											var op_J=op_after_I.split('<JEND>')[0].replace('<JSTART>','');
+											var op_after_J=op_after_I.split('<JEND>')[1]
+											//alert (op_J)
+											var op_K=op_after_J.split('<KEND>')[0].replace('<KSTART>','');
+											var op_after_K=op_after_J.split('<KEND>')[1]
+											//alert (op_K)
+											var op_L=op_after_K.split('<LEND>')[0].replace('<LSTART>','');
+											var op_after_L=op_after_K.split('<LEND>')[1]
+											//alert (op_L)
+											var op_M=op_after_L.split('<MEND>')[0].replace('<MSTART>','');
+											var op_after_M=op_after_L.split('<MEND>')[1]
+											//alert (op_M)
+											var op_N=op_after_M.split('<NEND>')[0].replace('<NSTART>','');
+											var op_after_N=op_after_M.split('<NEND>')[1]
+											//alert (op_N)
+											var op_O=op_after_N.split('<OEND>')[0].replace('<OSTART>','');
+											var op_after_O=op_after_N.split('<OEND>')[1]
+											//alert (op_O)
+											var op_P=op_after_O.split('<PEND>')[0].replace('<PSTART>','');
+											var op_after_P=op_after_O.split('<PEND>')[1]
+											//alert (op_P)
+											var op_Q=op_after_P.split('<QEND>')[0].replace('<QSTART>','');
+											var op_after_Q=op_after_P.split('<QEND>')[1]
+											//alert (op_Q)
+											var op_R=op_after_Q.split('<REND>')[0].replace('<RSTART>','');
+											var op_after_R=op_after_Q.split('<REND>')[1]
+											//alert (op_R)
+											var op_S=op_after_R.split('<SEND>')[0].replace('<SSTART>','');
+											var op_after_S=op_after_R.split('<SEND>')[1]
+											//alert (op_S)
+											var op_T=op_after_S.split('<TEND>')[0].replace('<TSTART>','');
+											var op_after_T=op_after_S.split('<TEND>')[1]
+											//alert (op_T)
+											var op_U=op_after_T.split('<UEND>')[0].replace('<USTART>','');
+											var op_after_U=op_after_T.split('<UEND>')[1]
+											//alert (op_U)
+											var op_V=op_after_U.split('<VEND>')[0].replace('<VSTART>','');
+											var op_after_V=op_after_U.split('<VEND>')[1]
+											//alert (op_V)
+											var op_W=op_after_V.split('<WEND>')[0].replace('<WSTART>','');
+											var op_after_W=op_after_V.split('<WEND>')[1]
+											//alert (op_W)
+											var op_X=op_after_W.split('<XEND>')[0].replace('<XSTART>','');
+											var op_after_X=op_after_W.split('<XEND>')[1]
+											//alert (op_Y)
+											var op_Y=op_after_X.split('<YEND>')[0].replace('<YSTART>','');
+											var op_after_Y=op_after_X.split('<YEND>')[1]
+											//alert (op_X)
+											var op_Z=op_after_Y.split('<ZEND>')[0].replace('<ZSTART>','');
+											var productListStr_after_E=productListStr_after_D.split('</Z>')[1]
+											//alert (op_K)
+											localStorage.op_A=op_A
+											//alert (localStorage.op_A)
+											localStorage.op_B=op_B
+											localStorage.op_C=op_C
+											localStorage.op_D=op_D
+											localStorage.op_E=op_E
+											localStorage.op_F=op_F
+											localStorage.op_G=op_G
+											localStorage.op_H=op_H
+											localStorage.op_I=op_I
+											localStorage.op_J=op_J
+											localStorage.op_K=op_K
+											localStorage.op_L=op_L
+											localStorage.op_M=op_M
+											localStorage.op_N=op_N
+											localStorage.pr_O=op_O
+											localStorage.op_P=op_P
+											localStorage.op_Q=op_Q
+											localStorage.op_R=op_R											
+											localStorage.op_S=op_S
+											localStorage.op_T=op_T
+											localStorage.op_U=op_U
+											localStorage.op_V=op_V
+											localStorage.op_W=op_W
+											localStorage.op_X=op_X
+											localStorage.op_Y=op_Y
+											localStorage.op_Z=op_Z
+
+											
 
 										}else{						
 											$("#error_login").html('Authentication error. Please register and sync to retry.');
