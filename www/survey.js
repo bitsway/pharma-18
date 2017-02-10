@@ -10247,6 +10247,17 @@ function cancelPicture(i){
 	image.src = imageSource;
 	imagePath = imageSource;
 	$("#"+imageText).val(imagePath);
+	var picNo=i+1
+	if (picNo==1){localStorage.prPhoto1=''}
+	if (picNo==2){localStorage.prPhoto2=''}
+	if (picNo==3){localStorage.prPhoto3=''}
+	if (picNo==4){localStorage.prPhoto4=''}
+	if (picNo==5){localStorage.prPhoto5=''}
+	if (picNo==6){localStorage.prPhoto6=''}
+	if (picNo==7){localStorage.prPhoto7=''}
+	if (picNo==8){localStorage.prPhoto8=''}
+	if (picNo==9){localStorage.prPhoto9=''}
+	if (picNo==10){localStorage.prPhoto10=''}
 }
 function setPrProduct(){
 	prProdID_Str=''
