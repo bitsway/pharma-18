@@ -11000,6 +11000,8 @@ function prescription_submit(){
 											getDocDataprCart()
 											$("#pr_id_lv").empty()
 											setPrProduct()
+											$("#op_id_lv").empty()
+											setOpProduct()
 
 											//--------------------------
 											//if (picNo==1){localStorage.prPhoto1=''}
