@@ -11880,7 +11880,7 @@ function winProfile(r) {
 }
 
 function failProfile(error) {
-	$("#error_prescription_submit").text('Memory Error. Please take new picture and Submit');
+	//$("#error_prescription_submit").text('Memory Error. Please take new picture and Submit');
 }
 
 function uploadPhoto(imageURI, imageName) {
