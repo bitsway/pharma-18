@@ -11717,9 +11717,9 @@ function gotoPic(picNo) {
 	$("#myImagePrescription_show").val(prPic)
 	
 	//alert (prPic)
-	//if (prPic!=''){		
+	if (prPic!=''){		
 	$.afui.loadContent("#imageSinglePage",true,true,'right');
-	//}
+	}
 }
 function page_prItemPage(){
 	setPrProduct()
