@@ -11678,9 +11678,9 @@ function gotoPic(picNo) {
 	$("#myImagePrescription_show").val(prPic)
 	
 	//alert (prPic)
-	//if (prPic!=''){		
+	if (prPic!=''){		
 	$.afui.loadContent("#imageSinglePage",true,true,'right');
-	//}
+	}
 }
 function page_prItemPage(){
 	setPrProduct()
@@ -11805,13 +11805,13 @@ $.ajax(localStorage.base_url+'doctor_sync?cid='+localStorage.cid+'&rep_id='+loca
 											//alert (op_W)
 											var op_X=op_after_W.split('<XEND>')[0].replace('<XSTART>','');
 											var op_after_X=op_after_W.split('<XEND>')[1]
-											//alert (op_Y)
+											//alert (op_X)
 											var op_Y=op_after_X.split('<YEND>')[0].replace('<YSTART>','');
 											var op_after_Y=op_after_X.split('<YEND>')[1]
-											//alert (op_X)
+											//alert (op_after_Y)
 											var op_Z=op_after_Y.split('<ZEND>')[0].replace('<ZSTART>','');
-											var productListStr_after_E=productListStr_after_D.split('</Z>')[1]
-											//alert (op_K)
+											//var productListStr_after_E=productListStr_after_D.split('</Z>')[1]
+											//alert (op_Z)
 											localStorage.op_A=op_A
 											//alert (localStorage.op_A)
 											localStorage.op_B=op_B
@@ -11826,6 +11826,7 @@ $.ajax(localStorage.base_url+'doctor_sync?cid='+localStorage.cid+'&rep_id='+loca
 											localStorage.op_K=op_K
 											localStorage.op_L=op_L
 											localStorage.op_M=op_M
+											//alert ('1')
 											localStorage.op_N=op_N
 											localStorage.pr_O=op_O
 											localStorage.op_P=op_P
@@ -11833,13 +11834,15 @@ $.ajax(localStorage.base_url+'doctor_sync?cid='+localStorage.cid+'&rep_id='+loca
 											localStorage.op_R=op_R											
 											localStorage.op_S=op_S
 											localStorage.op_T=op_T
+											//alert ('2')
 											localStorage.op_U=op_U
 											localStorage.op_V=op_V
 											localStorage.op_W=op_W
 											localStorage.op_X=op_X
 											localStorage.op_Y=op_Y
 											localStorage.op_Z=op_Z
-
+											//alert (localStorage.op_Z)
+									
 											
 
 										}else{						
