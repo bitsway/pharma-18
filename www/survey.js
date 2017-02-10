@@ -7945,7 +7945,7 @@ function searchPrChar(char) {
 		//$("#item_combo_id_lv").find(lis[0]).first().focus()
 	}
 	$("#pritemSearch").val('');
-	$("#pritemSearch").focus();
+	//$("#pritemSearch").focus();
 	
 }
 function searchOpChar(char) {
@@ -7963,7 +7963,7 @@ function searchOpChar(char) {
 		//$("#item_combo_id_lv").find(lis[0]).first().focus()
 	}
 	$("#opitemSearch").val('');
-	$("#opitemSearch").focus();
+	//$("#opitemSearch").focus();
 	
 }
 function searchCampaignChar(char) {
@@ -11079,6 +11079,43 @@ function prcancelSearch() {
 }
 //==========================================
 //==============================Opportunity===============
+
+function opsearchItem() {
+	//alert ('aaaaaaaaa ')		
+	//var filter = input.value.toUpperCase();
+	var filter  = $("#opitemSearch").val().toUpperCase();
+	//alert (filter)
+	//var lis = document.getElementsById('mylist');
+	 var lis =document.getElementById("op_id_lv").getElementsByTagName("li");
+	//var lis = document.getElementsByTagName('ul>li');
+	//alert(lis.length);
+	for (var i = 0; i < lis.length; i++) {
+		var name = lis[i].getElementsByClassName('name')[0].innerHTML;
+		
+		if (name.toUpperCase().indexOf(filter) == 0) 
+			lis[i].style.display = 'list-item';
+		else
+			lis[i].style.display = 'none';
+	}
+}
+function opcancelSearch() {
+	$("#opitemSearch").val('')
+	var filter  = $("#opitemSearch").val().toUpperCase();
+	//alert (filter)
+	//var lis = document.getElementsById('mylist');
+	 var lis =document.getElementById("op_id_lv").getElementsByTagName("li");
+	//var lis = document.getElementsByTagName('ul>li');
+	//alert(lis.length);
+	for (var i = 0; i < lis.length; i++) {
+		var name = lis[i].getElementsByClassName('name')[0].innerHTML;
+		
+		if (name.toUpperCase().indexOf(filter) == 0) 
+			lis[i].style.display = 'list-item';
+		else
+			lis[i].style.display = 'none';
+	}
+}
+
 function setOpProduct(){
 	opProdID_Str=''
 	//alert (localStorage.op_A)
@@ -11668,6 +11705,8 @@ function gotoPic(picNo) {
 		getDocDataprCart()
 		$("#pr_id_lv").empty()
 		setPrProduct()
+		$("#op_id_lv").empty()
+		setOpProduct()
 	}
 	localStorage.picNo=picNo
 	
@@ -11678,9 +11717,9 @@ function gotoPic(picNo) {
 	$("#myImagePrescription_show").val(prPic)
 	
 	//alert (prPic)
-	if (prPic!=''){		
+	//if (prPic!=''){		
 	$.afui.loadContent("#imageSinglePage",true,true,'right');
-	}
+	//}
 }
 function page_prItemPage(){
 	setPrProduct()
