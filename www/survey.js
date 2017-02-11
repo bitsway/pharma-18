@@ -10997,7 +10997,9 @@ function prescription_submit(){
 											$("#btn_prescription_submit").show();
 											
 											localStorage.prProdID_Str=''
+											localStorage.opProdID_Str=''
 											getDocDataprCart()
+											getDocDataopCart()
 											$("#pr_id_lv").empty()
 											setPrProduct()
 											$("#op_id_lv").empty()
@@ -11715,6 +11717,7 @@ function gotoPic(picNo) {
 	
 	if (picNo!=localStorage.picNo){
 		localStorage.prProdID_Str=''
+		localStorage.opProdID_Str=''
 		getDocDataprCart()
 		$("#pr_id_lv").empty()
 		setPrProduct()
