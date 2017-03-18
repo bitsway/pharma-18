@@ -10918,7 +10918,11 @@ function prescription_submit(){
 			var now = $.now();
 			var imageName=localStorage.user_id+'_'+now.toString()+'.jpg';
 			//alert (imageName);
-				
+			if (medicine_3==''){		
+				$("#error_prescription_submit").text("Required Doctor Catagory:");
+				$("#wait_image_prescription").hide();
+				$("#btn_prescription_submit").show();	
+			}else{	
 				
 				//alert (localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&campaign_doc_str='+localStorage.prProdID_Str+'&opProdID_Str='+localStorage.opProdID_Str+'&medicine_1='+medicine_1+'&medicine_2='+medicine_2+'&medicine_3='+medicine_3+'&medicine_4='+medicine_4+'&medicine_5='+medicine_5+'&checkOther='+checkOther)							
 
@@ -11047,9 +11051,9 @@ function prescription_submit(){
 											$("#btn_prescription_submit").show();
 											}
 								}
-}
+		}
 						});			 
-				
+}
 						
 //		}pic else
 	}
