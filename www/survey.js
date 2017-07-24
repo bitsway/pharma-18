@@ -489,14 +489,14 @@ function homePage() {
 
 	//if ((localStorage.synced=='YES') & (localStorage.sync_date==today)){
 	if (localStorage.synced=='YES'){
-		if (localStorage.user_type=='sup'){
-			$("#chemisVDiv").hide();
-			$("#chSaveDiv").hide();
-		}
-		else{
-			$("#chemisVDiv").show();
-			$("#chSaveDiv").show();
-		}
+		//if (localStorage.user_type=='sup'){
+//			$("#chemisVDiv").hide();
+//			$("#chSaveDiv").hide();
+//		}
+//		else{
+//			$("#chemisVDiv").show();
+//			$("#chSaveDiv").show();
+//		}
 		
 		$.afui.loadContent("#pageHome",true,true,'right');
 	}
@@ -2225,14 +2225,14 @@ localStorage.report_button=' <input type="submit" id="loginButton" onClick="s_or
 													 checkRequest()
 													}
 													checkInbox();
-													if (localStorage.user_type=='sup'){
-			$("#chemisVDiv").hide();
-			$("#chSaveDiv").hide();
-		}
-		else{
-			$("#chemisVDiv").show();
-			$("#chSaveDiv").show();
-		}
+													//if (localStorage.user_type=='sup'){
+//														$("#chemisVDiv").hide();
+//														$("#chSaveDiv").hide();
+//													}
+//													else{
+//														$("#chemisVDiv").show();
+//														$("#chSaveDiv").show();
+//													}
 													$.afui.loadContent("#pageHome",true,true,'right');
 													
 													set_doc_all();
