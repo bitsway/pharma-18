@@ -291,16 +291,16 @@ $.afui.useOSThemes=false;
 			$("#cid").val(localStorage.cid);
 			$("#user_id").val(localStorage.user_id);
 			$("#user_pass").val(localStorage.user_pass);
-			if (localStorage.user_type=='sup'){
-			$("#chemisVDiv").hide();
-			$("#chSaveDiv").hide();
+			//if (localStorage.user_type=='sup'){
+			//$("#chemisVDiv").hide();
+			//$("#chSaveDiv").hide();
 			
 			
-			}
-			else{
-				$("#chemisVDiv").show();
-				$("#chSaveDiv").show();
-			}
+			//}
+			//else{
+				//$("#chemisVDiv").show();
+				//$("#chSaveDiv").show();
+			//}
 			//alert (localStorage.synced)
 			$.afui.loadContent("#pageHome",true,true,'right');
 			
@@ -489,14 +489,14 @@ function homePage() {
 
 	//if ((localStorage.synced=='YES') & (localStorage.sync_date==today)){
 	if (localStorage.synced=='YES'){
-		if (localStorage.user_type=='sup'){
-			$("#chemisVDiv").hide();
-			$("#chSaveDiv").hide();
-		}
-		else{
-			$("#chemisVDiv").show();
-			$("#chSaveDiv").show();
-		}
+		//if (localStorage.user_type=='sup'){
+//			$("#chemisVDiv").hide();
+//			$("#chSaveDiv").hide();
+//		}
+//		else{
+//			$("#chemisVDiv").show();
+//			$("#chSaveDiv").show();
+//		}
 		
 		$.afui.loadContent("#pageHome",true,true,'right');
 	}
@@ -1491,11 +1491,9 @@ function check_user() {
 	//var  apipath_base_photo_dm='http://127.0.0.1:8000/demo/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	
 	//var  apipath_base_photo_dm='http://c003.cloudapp.net/demo/syncmobile_417_new/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
-  //var apipath_base_photo_dm ='http://w02.yeapps.com/gpl/syncmobile_417_new_test/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
-  
-  var apipath_base_photo_dm ='http://w02.yeapps.com/welcome/dmpath_live_web/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
 
- // var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
+
+  var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
  
 	
 	var user_id=$("#user_id").val();
@@ -1653,7 +1651,6 @@ function check_user() {
 													localStorage.marketTourStr=resultArray[32]
 													localStorage.docTThisMonthRow=resultArray[33]
 													localStorage.prProductStr=resultArray[34]
-													localStorage.linkStr=resultArray[35]
 													//alert (localStorage.marketStrDoc)
 													
 													//alert (localStorage.menu)
@@ -1661,39 +1658,7 @@ function check_user() {
 													
 													//localStorage.clie nt_depot_name=resultArray[27];
 													
-													//===============================================
-													var linkStrList = localStorage.linkStr.split('<rd>');							
-													var linkStr_combo=''
 													
-													for (var l=0; l < linkStrList.length; l++){
-														linkStrListArray = linkStrList[l].split('<fd>');
-														var pathName=linkStrListArray[0];
-														var path_value=linkStrListArray[1];
-														var check=linkStrListArray[2];
-														
-														if (check=='Check'){
-															//alert ('1')
-														 var linkPath="window.open('"+path_value+"cid="+localStorage.cid+"&rep_id="+localStorage.user_id+"&rep_pass="+localStorage.user_pass	+"', '_system');"
-														}
-														else{
-															//alert ('2')
-															 var linkPath="window.open('"+path_value+"', '_system');"
-														}
-														
-														//alert (linkPath);
-														if(path_value!=''){
-															linkStr_combo+='<li style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table width="100%" border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="border-radius:5px;"><tr><td><a href="#" onclick="'+linkPath+'">'+pathName+'</a></td></tr></table></li>';
-															
-															
-															}
-													}
-													
-																		
-													localStorage.linkStr_combo=linkStr_combo;	
-													//alert (localStorage.linkStr_combo)								
-													$('#page_link_lv').empty();
-													$('#page_link_lv').append(localStorage.linkStr_combo);	
-												//	==================================================================
 													//
 													if (localStorage.visit_location_flag!='YES'){
 														//alert (localStorage.visit_location);
@@ -2260,14 +2225,14 @@ localStorage.report_button=' <input type="submit" id="loginButton" onClick="s_or
 													 checkRequest()
 													}
 													checkInbox();
-													if (localStorage.user_type=='sup'){
-			$("#chemisVDiv").hide();
-			$("#chSaveDiv").hide();
-		}
-		else{
-			$("#chemisVDiv").show();
-			$("#chSaveDiv").show();
-		}
+													//if (localStorage.user_type=='sup'){
+//														$("#chemisVDiv").hide();
+//														$("#chSaveDiv").hide();
+//													}
+//													else{
+//														$("#chemisVDiv").show();
+//														$("#chSaveDiv").show();
+//													}
 													$.afui.loadContent("#pageHome",true,true,'right');
 													
 													set_doc_all();
@@ -12073,42 +12038,3 @@ function cameraError(message){
 $('#ThumbnailTest_buttonTakePhotosNow').click(function(){
     takePicture();
 });
-
-
-function page_Link() {	
-	
-	
-						
-	//localStorage.linkStr_combo=linkStr_combo;	
-	//alert (localStorage.linkStr_combo)								
-	$('#page_link_lv').empty();
-	$('#page_link_lv').append(localStorage.linkStr_combo);	
-	
-	
-	$.afui.loadContent("#page_link",true,true,'right');
-}
-
-
-function check_in(){  
-	getLocationInfo()
-	var latitude=$("#lat").val();
-	var longitude=$("#longitude").val();
-	//alert (localStorage.base_url+'check_in?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+longitude)
-	$.ajax(localStorage.base_url+'check_in?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+longitude,{									
-		type: 'POST',
-		timeout: 30000,
-		error: function(xhr) {
-			alert ('Error: ' + xhr.status + ' ' + xhr.statusText);
-		},
-		success:function(data, status,xhr){	
-			resultArray=data.split('<SYNCDATA>')
-			if (resultArray[0]=='FAILED'){	
-				alert (resultArray[1]);									
-			}else if (resultArray[0]=='SUCCESS'){
-				alert (resultArray[1]);																		
-			}		  
-		}//success
-});//end post	
-
-}
-
