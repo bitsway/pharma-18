@@ -12093,7 +12093,7 @@ function check_in(){
 	getLocationInfo()
 	var latitude=$("#lat").val();
 	var longitude=$("#longitude").val();
-	//alert (localStorage.base_url+'check_in?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+longitude)
+	alert (localStorage.base_url+'check_in?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+longitude)
 	$.ajax(localStorage.base_url+'check_in?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+longitude,{									
 		type: 'POST',
 		timeout: 30000,
