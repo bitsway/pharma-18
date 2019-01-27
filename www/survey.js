@@ -871,7 +871,7 @@ function getLocationInfo() { //location
 }
 
 function onSuccess(position) {
-	
+	alert ('1')
 	$("#lat").val(position.coords.latitude);
 	$("#longitude").val(position.coords.longitude);
 	
@@ -913,7 +913,7 @@ function onSuccess(position) {
 	
 } 
 function onError(error) {
-	
+	alert ('2')
 	localStorage.location_error=error.code
 	
 	
