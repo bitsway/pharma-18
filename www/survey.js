@@ -1015,7 +1015,7 @@ function onSuccess_ready(position) {
 } 
 function onError_ready(error) {
 	
-	alert (error);
+	alert ('errot');
 	
 	$("#lat").val(0);
 	$("#longitude").val(0);
@@ -12105,21 +12105,21 @@ function check_in(){
 	var latitude=$("#latCheckin").val();
 	var longitude=$("#longitudeCheckin").val();
 	alert (localStorage.base_url+'check_in?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+longitude)
-	$.ajax(localStorage.base_url+'check_in?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+longitude,{									
-		type: 'POST',
-		timeout: 30000,
-		error: function(xhr) {
-			alert ('Error: ' + xhr.status + ' ' + xhr.statusText);
-		},
-		success:function(data, status,xhr){	
-			resultArray=data.split('<SYNCDATA>')
-			if (resultArray[0]=='FAILED'){	
-				alert (resultArray[1]);									
-			}else if (resultArray[0]=='SUCCESS'){
-				alert (resultArray[1]);																		
-			}		  
-		}//success
-});//end post	
+	//$.ajax(localStorage.base_url+'check_in?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+longitude,{									
+//		type: 'POST',
+//		timeout: 30000,
+//		error: function(xhr) {
+//			alert ('Error: ' + xhr.status + ' ' + xhr.statusText);
+//		},
+//		success:function(data, status,xhr){	
+//			resultArray=data.split('<SYNCDATA>')
+//			if (resultArray[0]=='FAILED'){	
+//				alert (resultArray[1]);									
+//			}else if (resultArray[0]=='SUCCESS'){
+//				alert (resultArray[1]);																		
+//			}		  
+//		}//success
+//});//end post	
 
 }
 
