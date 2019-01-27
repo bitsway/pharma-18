@@ -12102,24 +12102,31 @@ function page_Link() {
 
 function check_in(){  
 	getLocationInfo_ready()
+	$('#checkInSow').html('<img id="wait_image_ret" style="width:50px" src="loading.gif" alt="">');
+	
+	
+	
 	var latitude=$("#latCheckin").val();
 	var longitude=$("#longitudeCheckin").val();
 	alert (localStorage.base_url+'check_in?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+longitude)
-	//$.ajax(localStorage.base_url+'check_in?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+longitude,{									
-//		type: 'POST',
-//		timeout: 30000,
-//		error: function(xhr) {
-//			alert ('Error: ' + xhr.status + ' ' + xhr.statusText);
-//		},
-//		success:function(data, status,xhr){	
-//			resultArray=data.split('<SYNCDATA>')
-//			if (resultArray[0]=='FAILED'){	
-//				alert (resultArray[1]);									
-//			}else if (resultArray[0]=='SUCCESS'){
-//				alert (resultArray[1]);																		
-//			}		  
-//		}//success
-//});//end post	
-
+			if ((latitude!=longitude) & (latitude!=0)& (longitude!=0)){	
+			$.ajax(localStorage.base_url+'check_in?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+longitude,{									
+				type: 'POST',
+				timeout: 30000,
+				error: function(xhr) {
+					$('#checkInSow').html('<img onClick="check_in();" style="padding-top:0px; padding-bottom:0px;" hight="100px" width="100px" src="checkin.png"> ');
+				},
+				success:function(data, status,xhr){	
+					resultArray=data.split('<SYNCDATA>')
+					if (resultArray[0]=='FAILED'){	
+						alert (resultArray[1]);	
+						$('#checkInSow').html('<img onClick="check_in();" style="padding-top:0px; padding-bottom:0px;" hight="100px" width="100px" src="checkin.png"> '	)							
+					}else if (resultArray[0]=='SUCCESS'){
+						alert (resultArray[1]);	
+						$('#checkInSow').html('<img onClick="check_in();" style="padding-top:0px; padding-bottom:0px;" hight="100px" width="100px" src="checkin.png"> '	)																	
+					}		  
+				}//success
+		});//end post	
+	}
 }
 
