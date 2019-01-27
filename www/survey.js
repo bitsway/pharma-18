@@ -871,12 +871,11 @@ function getLocationInfo() { //location
 }
 
 function onSuccess(position) {
-	alert ('1')
+	
 	$("#lat").val(position.coords.latitude);
 	$("#longitude").val(position.coords.longitude);
 	
-	$("#latCheckin").val(position.coords.latitude);
-	$("#longitudeCheckin").val(position.coords.longitude);
+	
 	
 	//$("#lat_p").val(position.coords.latitude);
 	//$("#long_p").val(position.coords.longitude);
@@ -913,7 +912,7 @@ function onSuccess(position) {
 	
 } 
 function onError(error) {
-	alert ('2')
+	
 	localStorage.location_error=error.code
 	
 	
@@ -923,8 +922,7 @@ function onError(error) {
 	$("#lat").val(0);
 	$("#longitude").val(0);
 	
-	$("#latCheckin").val(0);
-	$("#longitudeCheckin").val(0);
+	
 	
 	//$("#lat_p").val(0);
 	//$("#long_p").val(0);
@@ -975,8 +973,12 @@ function getLocationInfo_ready() { //location
 // onSuccess Geolocationshom
 
 function onSuccess_ready(position) {
+	alert ('Success')
 	$("#lat").val(position.coords.latitude);
 	$("#longitude").val(position.coords.longitude);
+	
+	$("#latCheckin").val(position.coords.latitude);
+	$("#longitudeCheckin").val(position.coords.longitude);
 	
 	//$("#lat_p").val(position.coords.latitude);
 	//$("#long_p").val(position.coords.longitude);
@@ -1013,10 +1015,13 @@ function onSuccess_ready(position) {
 } 
 function onError_ready(error) {
 	
-	//alert (error);
+	alert (error);
 	
 	$("#lat").val(0);
 	$("#longitude").val(0);
+	
+	$("#latCheckin").val(0);
+	$("#longitudeCheckin").val(0);
 	
 	//$("#lat_p").val(0);
 	//$("#long_p").val(0);
@@ -12096,9 +12101,9 @@ function page_Link() {
 
 
 function check_in(){  
-	getLocationInfo()
-	var latitude=$("#lat").val();
-	var longitude=$("#longitude").val();
+	getLocationInfo_ready()
+	var latitude=$("#latCheckin").val();
+	var longitude=$("#longitudeCheckin").val();
 	alert (localStorage.base_url+'check_in?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+longitude)
 	$.ajax(localStorage.base_url+'check_in?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+longitude,{									
 		type: 'POST',
