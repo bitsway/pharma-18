@@ -875,6 +875,9 @@ function onSuccess(position) {
 	$("#lat").val(position.coords.latitude);
 	$("#longitude").val(position.coords.longitude);
 	
+	$("#latCheckin").val(position.coords.latitude);
+	$("#longitudeCheckin").val(position.coords.longitude);
+	
 	//$("#lat_p").val(position.coords.latitude);
 	//$("#long_p").val(position.coords.longitude);
 	
@@ -919,6 +922,9 @@ function onError(error) {
 	
 	$("#lat").val(0);
 	$("#longitude").val(0);
+	
+	$("#latCheckin").val(0);
+	$("#longitudeCheckin").val(0);
 	
 	//$("#lat_p").val(0);
 	//$("#long_p").val(0);
