@@ -973,7 +973,7 @@ function getLocationInfo_ready() { //location
 // onSuccess Geolocationshom
 
 function onSuccess_ready(position) {
-	alert ('Success')
+	//alert ('Success')
 	$("#lat").val(position.coords.latitude);
 	$("#longitude").val(position.coords.longitude);
 	
@@ -1015,7 +1015,7 @@ function onSuccess_ready(position) {
 } 
 function onError_ready(error) {
 	
-	alert ('errot');
+	//alert ('errot');
 	
 	$("#lat").val(0);
 	$("#longitude").val(0);
@@ -12108,7 +12108,7 @@ function check_in(){
 	
 	var latitude=$("#latCheckin").val();
 	var longitude=$("#longitudeCheckin").val();
-	alert (localStorage.base_url+'check_in?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+longitude)
+	//alert (localStorage.base_url+'check_in?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+longitude)
 			if ((latitude!=longitude) & (latitude!=0)& (longitude!=0)){	
 			$.ajax(localStorage.base_url+'check_in?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+longitude,{									
 				type: 'POST',
@@ -12127,6 +12127,10 @@ function check_in(){
 					}		  
 				}//success
 		});//end post	
+	}
+	else{
+		alert ('Error Getting Location Data !');	
+		$('#checkInSow').html('<img onClick="check_in();" style="padding-top:0px; padding-bottom:0px;" hight="100px" width="100px" src="checkin.png"> '	)	
 	}
 }
 
